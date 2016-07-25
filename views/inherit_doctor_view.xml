@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+	<!-- doctor hc Odontologia Form View -->
+	<record model="ir.ui.view" id="view_doctor_hc_odonto_form">
+		<field name="name">Doctor HC Odontologia</field>
+		<field name="model">doctor.hc.odontologia</field>
+		<field name="arch" type="xml">
+			<form string="Doctor HC Odontologia" version="7.0">
+				<header>
+                    <button string="Finalizar Atención" name="finalizar_atencion" states="abierta" type="object" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="abierta,cerrada"/>
+                </header>
+				<group colspan='4' col='4'>
+					<group colspan='4' col='2'>
+					<fieldset class="fieldset_margen">
+						<legend class="texto_legend">Paciente</legend>
+						<group col='2'>
+						<field name='patient_photo' nolabel='1' widget="image" img_height="50" width="50" height="50"/>
+							<group col='1'>
+								<div>
+								<h3>
+								<field name='patient_id' nolabel='1' on_change="onchange_patient(patient_id)"/>
+								</h3>
+								</div>
+								<group col='2'>
+									<div>
+									<field name='age_attention' nolabel='1' style="width:10%%"/>
+									<field name='age_unit' nolabel='1' style="width:10%%"/> - de Edad
+									</div>
+								</group>
+							</group>
+						</group>
+					</fieldset>
+
+					<fieldset class="fieldset_margen">
+						<legend class="texto_legend">Profesional de la Salud</legend>
+						<group col='2'>
+						<field name='professional_photo' nolabel='1' widget="image" img_height="50" width="50" height="50"/>
+							<group col='1'>
+								<div>
+								<field name='professional_id' nolabel='1' on_change="onchange_professional(professional_id)"/>
+								</div>
+								<group col='1'>
+									<div>
+									<field name='speciality' domain="[('name', '=', speciality)]" style="width:70%%"/>
+									</div>
+								</group>
+							</group>
+						</group>
+					</fieldset>
+					</group>
+				</group>
+				<!--EXAMENES-->
+				 <fieldset class="fieldset_margen">
+				<legend class="texto_legend">Exámenes</legend>
+				<notebook colspan="4">
+					<page string="Constantes Vitales">
+						<group colspan='4' col='3'>
+						<fieldset class="fieldset_margen">
+						<legend class="texto_legend">Peso</legend>
+						<group>
+							<field name="peso" />
+						</group>
+						</fieldset>
+						<fieldset class="fieldset_margen">
+						<legend class="texto_legend">Signos Vitales</legend>
+							<group >
+								<label for="frecuencia_cardiaca" string="Frecuencia cardiaca"/>
+								<field name='frecuencia_cardiaca' nolabel='1' style="width:5%%"/>
+								<label for="frecuencia_respiratoria" string="Frecuencia respiratoria"/>
+								<field name='frecuencia_respiratoria' nolabel='1' style="width:5%%"/>
+							</group>
+						</fieldset>		
+						<fieldset class="fieldset_margen">
+						<legend class="texto_legend">Presión Sanguínea</legend>
+						<group>
+							<label for="sistolica" string="Sistólica"/>
+							<field name='sistolica' nolabel='1' style="width:5%%"/>
+							<label for="diastolica" string="Diastólica"/>
+							<field name='diastolica' nolabel='1' style="width:5%%"/>
+						</group>
+						</fieldset>
+						</group>  			     
+						
+					</page>
+					<page string="Examen Estomatológico">
+					   <group>
+					   		<field name="examen_estomatologico_ids" nolabel="1">
+					   			<tree string="Examen Estomatológico" editable="bottom">
+					   				<field name="estructura" />
+									<field name="normal" />
+									<field name="anormal" />
+					   			</tree>
+					   		</field>
+					   	</group>
+					   	<group col="4">
+					   		<field name="clasificacion_angle" on_change="on_change_clasificacionangle(indeterminable)"/>
+					   		<field name="indeterminable" on_change="on_change_indeterminable(clasificacion_angle)"/>
+					   	</group>
+					   	<legend class="texto_legend">Hábitos Orales</legend>
+					   	<field name="habitos_orales"/>
+					</page>
+					<page string="Odontograma">
+						<group>
+							<field name="img_odontograma" nolabel="1" widget="image" colspan="4"/>
+						</group>
+						<group>
+							<field name="diagnosticos_ids" nolabel="1">
+								<tree editable="bottom">
+									<field name="dientes_id"/>
+									<field name="superficie_diente"/>
+									<field name="diagnostico_odontologico_id" context="{'odontologia':'1'}"/>
+									<field name="procedimiento_id" context="{'odontologia':'1'}"/>
+								</tree>
+							</field>
+						</group>
+					</page>
+				</notebook>
+				</fieldset>
+				
+			    <!--ANALISIS DE LA ATENCION-->
+			   
+				<fieldset class="fieldset_margen">
+				<legend class="texto_legend">Análisis</legend>
+				<field name="analisis_atencion"/>
+				</fieldset>
+			    	
+				<group col="4" colspan="4">
+
+				<!--ANTECEDENTES-->
+				<group col="2" colspan="2">
+					<notebook>
+			    <page string="Antecedentes">
+				<separator string="Antecedentes" colspan="4"/>
+				<field name="antecedente_ids" nolabel="1" readonly="1" context="{'patient_id' : patient_id}">
+                	<tree string="Past" editable="top">
+                        <field name="attentiont_id" invisible="True" domain="[('attentiont_id', '&lt;', active_id)]"/>
+                        <field name="patient_id" invisible="True"/>
+                        <field name="categoria_antecedente"/>
+                        <field name="antecedente"/>
+                    </tree>
+                    <form string="Past">
+						<group>
+							<field name="attentiont_id" invisible="True" domain="[('attentiont_id', '&lt;', active_id)]"/>
+							<field name="patient_id" invisible="True"/>
+							<field name="categoria_antecedente"/>
+							<field name="antecedente"/>
+						</group>
+					</form>
+                </field>
+				</page>
+					<page string="Agregar Antecedente">
+						<separator string="Agregar Antecedente" colspan="4"/>
+						 <field name="agregar_antecedente_ids" nolabel="1" context="{'patient_id' : patient_id}">
+                                <tree string="Add Past" editable="top">
+                                    <field name="patient_id" invisible="True"/>
+                                    <field name="categoria_antecedente"/>
+                        			<field name="antecedente"/>
+                                </tree>
+                                <form string="Add Past">
+                                    <group>
+                                        <field name="patient_id" invisible="True"/>
+                                        <field name="categoria_antecedente"/>
+                        				<field name="antecedente"/>
+                                    </group>
+                                </form>
+                            </field>
+					</page>
+			    		</notebook>
+			    	</group>
+			    	<group col="2" colspan="2">
+				
+				<notebook colspan="4">
+					
+					<page string="Prescripcion">
+						<separator string="Prescripción de Medicamentos" colspan="4"/>
+						<field name="prescripciones_ids"/>
+					</page>
+					<page string="Recomendaciones">
+						<separator string="Recomendaciones" colspan="4"/>
+						<div>
+							<field name="recomendaciones_ids" widget="many2many_tags" placeholder="Recomendaciones"/>
+						</div>
+					</page>
+				</notebook>
+				</group>
+				</group>
+				
+				
+			</form>
+		</field>
+	</record>
+	
+	<!-- Doctor HC Odontologia Tree View -->
+	<record model="ir.ui.view" id="view_doctor_hc_odonto_tree">
+		<field name="name">Doctor HC Odontologia</field>
+		<field name="model">doctor.hc.odontologia</field>
+		<field name="arch" type="xml">
+			<tree string="Doctor HC Odontologia" version="7.0" create="false">
+				<field name="patient_id"></field>
+                <field name="number"/>
+                <field name="date_attention"></field>
+                <field name="professional_id"></field>
+                <field name="speciality"></field>
+                <field name="state"></field>
+			</tree>
+		</field>
+	</record>
+
+	<!-- Doctor HC Odontologia Action -->
+	<record model="ir.actions.act_window" id="action_doctor_hc_odontologia">
+		<field name="name">Doctor HC Odontologia</field>
+		<field name="res_model">doctor.hc.odontologia</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<!-- doctor Menu -->
+	 <menuitem name="HC Odontologia" id="menu_doctor_attentions" action="action_doctor_hc_odontologia" parent="doctor.menu_doctor_process"/>
+ 
+
+	</data>
+</openerp>

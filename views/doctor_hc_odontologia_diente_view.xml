@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="doctor_hc_diente_form">
+      <field name="name">doctor.hc.odontologia.diente.form</field>
+      <field name="model">doctor.hc.odontologia.diente</field>
+      <field name="arch" type="xml">
+        <form string="Diente" version="7.0">
+          <sheet> 
+            <fieldset>
+              <field name="id" invisible="1"/>
+              <legend class="texto_legend">Crea de Dientes</legend>
+                <group col="2" colspan="4">
+                  <field name="descripcion_diente"/>
+                  <field name="name"/>
+                </group>               
+            </fieldset>
+          </sheet> 
+        </form>
+      </field>
+    </record>
+
+    <!-- Tree View -->
+    <record model="ir.ui.view" id="doctor_hc_diente_tree">
+      <field name="name">doctor.hc.odontologia.diente.tree</field>
+      <field name="model">doctor.hc.odontologia.diente</field>
+      <field name="arch" type="xml">
+        <tree string="Diente">
+          <field name="name"/>
+          <field name="descripcion_diente"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="doctor_hc_odontologia_diente" model="ir.actions.act_window">
+      <field name="name">Configuración de Dientes</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">doctor.hc.odontologia.diente</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Configuración de Dientes" parent="doctor.menu_doctor_config" id="doctor_hc_odontologia_diente_menu" action="doctor_hc_odontologia_diente"/>
+
+	</data>
+</openerp>
