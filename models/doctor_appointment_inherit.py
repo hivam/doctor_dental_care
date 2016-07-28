@@ -42,12 +42,12 @@ class doctor_appointment(osv.osv):
 		# Get appoinment type
 		appointment_type = doctor_appointment.type_id.name
 
-		#GET model of the view 
+		#GET model of the viewpg 
 		data_obj = self.pool.get('ir.model.data')
 
 		#condition
 		if appointment_type == u'Odontológica':
-			result = data_obj._get_id(cr, uid, 'doctor_hc_odontologia', 'view_doctor_hc_odonto_tree')
+			result = data_obj._get_id(cr, uid, 'doctor_dental_care', 'view_doctor_hc_odonto_form')
 			view_id = data_obj.browse(cr, uid, result).res_id
 			
 			return {
