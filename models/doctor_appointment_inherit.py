@@ -42,14 +42,19 @@ class doctor_appointment(osv.osv):
 		# Get appoinment type
 		appointment_type = doctor_appointment.type_id.name
 
+		profesional_id = doctor_appointment.schedule_id.professional_id.id
+
 		#GET model of the viewpg 
 		data_obj = self.pool.get('ir.model.data')
+
+		_logger.info(context)
 
 		#condition
 		if appointment_type == u'Odontológica':
 			result = data_obj._get_id(cr, uid, 'doctor_dental_care', 'view_doctor_hc_odonto_form')
 			view_id = data_obj.browse(cr, uid, result).res_id
-			
+			context['default_patient_id'] = context.get('patient_id')
+			context['default_professional_id'] = profesional_id
 			return {
 				'view_type': 'form',
 				'view_mode': 'form',
@@ -57,7 +62,7 @@ class doctor_appointment(osv.osv):
 				'res_id': attentiont_id,
 				'view_id': [view_id],
 				'type': 'ir.actions.act_window',
-				'context' : context,
+				'context' : context or None,
 				'nodestroy': True,
 				'target' : 'new',
 			}
