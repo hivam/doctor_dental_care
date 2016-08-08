@@ -64,7 +64,7 @@ class doctor_appointment(osv.osv):
 				'type': 'ir.actions.act_window',
 				'context' : context or None,
 				'nodestroy': True,
-				'target' : 'new',
+				'target' : 'current',
 			}
 
 		else:
@@ -81,5 +81,5 @@ class doctor_appointment(osv.osv):
 				'type': 'ir.actions.act_window',
 				'context' : context,
 				'nodestroy': True,
-				'target' : 'new',
+				'target' : 'current',
 			}
