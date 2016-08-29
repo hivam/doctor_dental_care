@@ -34,6 +34,7 @@ Historia Clinica Para Odontologia.
     'license': 'AGPL-3',
     'depends' : ['doctor', 'knowledge', 'account_voucher', 'l10n_co_doctor'],
     'data' : [
+        'security/ir.model.access.csv',
         'views/inherit_doctor_view.xml',
         'views/doctor_hc_odontologia_diente_view.xml',
         'data/doctor_hc_odontologia_diente_data.xml',

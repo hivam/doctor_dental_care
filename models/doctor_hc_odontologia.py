@@ -38,21 +38,21 @@ class doctor_hc_odontologia(osv.osv):
 			vals['number'] = self.pool.get('ir.sequence').get(cr, uid, 'attention.sequence')
 		return super(doctor_hc_odontologia, self).create(cr, uid, vals, context=context)
 
-	# def default_get(self, cr, uid, fields, context=None):
-	# 	res = super(doctor_hc_odontologia,self).default_get(cr, uid, fields, context=context)
+	def default_get(self, cr, uid, fields, context=None):
+		res = super(doctor_hc_odontologia,self).default_get(cr, uid, fields, context=context)
 		
 
-	# 	if context.get('active_model') == "doctor.patient":
-	# 		id_paciente = context.get('default_patient_id')
-	# 	else:
-	# 		id_paciente = context.get('patient_id')
+		if context.get('active_model') == "doctor.patient":
+			id_paciente = context.get('default_patient_id')
+		else:
+			id_paciente = context.get('patient_id')
 
-	# 	if id_paciente:    
-	# 		fecha_nacimiento = self.pool.get('doctor.patient').browse(cr,uid,id_paciente,context=context).birth_date
-	# 		res['age_attention'] = self.calcular_edad(fecha_nacimiento)
-	# 		res['age_unit'] = self.calcular_age_unit(fecha_nacimiento)
+		if id_paciente:    
+			fecha_nacimiento = self.pool.get('doctor.patient').browse(cr,uid,id_paciente,context=context).birth_date
+			res['age_attention'] = self.calcular_edad(fecha_nacimiento)
+			res['age_unit'] = self.calcular_age_unit(fecha_nacimiento)
 
-	# 	return res
+		return res
 
 	def finalizar_atencion(self, cr, uid, ids, context=None):
 		return self.write(cr, uid, ids, {'state': 'cerrada'}, context=context)
@@ -184,7 +184,6 @@ class doctor_hc_odontologia(osv.osv):
 		values.update({
 			'professional_photo': professional_img,
 		})
-		_logger.info(values)
 		return {'value': values}
 
 	_columns = {
@@ -230,28 +229,19 @@ class doctor_hc_odontologia(osv.osv):
 		'state': fields.selection([('abierta', 'Abierta'), ('cerrada', 'Cerrada')], 'Estado', readonly=True, required=True),
 	}
 
-	def _get_professional_id(self, cr, uid, user_id):
-		try:
-			professional_id= self.pool.get('doctor.professional').browse(cr, uid, self.pool.get('doctor.professional').search(cr, uid, [( 'user_id',  '=', uid)]))[0].id
-			return professional_id
-		except Exception as e:
-			raise osv.except_osv(_('Error!'),
-								 _('El usuario del sistema no es profesional de la salud.'))
-
 	_constraints = [
 		
 	]
 
-	# _defaults = {
-	# 	'patient_id': lambda self, cr, uid, context: context.get('patient_id', False),
-	# 	'professional_id': _get_professional_id,
-	# 	'img_odontograma': _get_default_signature,
-	# 	'examen_estomatologico_ids': _get_default_estomatologicos,
-	# 	'date_attention': lambda *a: datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S"),
-	# 	'habitos_orales' : 'No registra ...',
-	# 	'analisis_atencion' :  'No registra ...',
-	# 	'state': 'abierta',
-	# }
+	_defaults = {
+		'patient_id': lambda self, cr, uid, context: context.get('patient_id', False),
+		'img_odontograma': _get_default_signature,
+		'examen_estomatologico_ids': _get_default_estomatologicos,
+		'date_attention': lambda *a: datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S"),
+		'habitos_orales' : 'No registra ...',
+		'analisis_atencion' :  'No registra ...',
+		'state': 'abierta',
+	}
 
 
 doctor_hc_odontologia()

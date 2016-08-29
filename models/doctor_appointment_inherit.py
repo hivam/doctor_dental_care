@@ -38,7 +38,7 @@ class doctor_appointment(osv.osv):
 		appointment_state = doctor_appointment.state
 		if appointment_state != 'invoiced':
 			self.write(cr, uid, doctor_appointment.id, {'state': 'attending'}, context=context)
-		#self.write(cr, uid, doctor_appointment.id, {'attended': True}, context=context)
+		self.write(cr, uid, doctor_appointment.id, {'attended': True}, context=context)
 		# Get appoinment type
 		appointment_type = doctor_appointment.type_id.name
 
@@ -47,7 +47,7 @@ class doctor_appointment(osv.osv):
 		#GET model of the viewpg 
 		data_obj = self.pool.get('ir.model.data')
 
-		_logger.info(context)
+		
 
 		#condition
 		if appointment_type == u'Odontológica':
