@@ -217,7 +217,7 @@
 	</record>
 
 	<!-- doctor Menu -->
-	 <menuitem name="Atenciones Odontología" id="menu_doctor_attentions" action="action_doctor_hc_odontologia" parent="doctor.menu_doctor_process"  sequence="42"/>
+	 <menuitem name="Atenciones Odontología" id="menu_doctor_attentions_odontologia" action="action_doctor_hc_odontologia" parent="doctor.menu_doctor_process"  sequence="42"/>
  
 
 	</data>
