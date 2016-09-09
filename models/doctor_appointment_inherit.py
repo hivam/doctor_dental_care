@@ -56,11 +56,12 @@ class doctor_appointment(osv.osv):
 			context['default_patient_id'] = context.get('patient_id')
 			context['default_professional_id'] = profesional_id
 			return {
+				'type': 'ir.actions.act_window',
 				'view_type': 'form',
 				'view_mode': 'form',
 				'res_model': 'doctor.hc.odontologia',
-				'res_id': attentiont_id,
-				'view_id': [view_id],
+				'res_id': False,
+				'view_id': [view_id] or False,
 				'type': 'ir.actions.act_window',
 				'context' : context or None,
 				'nodestroy': True,
