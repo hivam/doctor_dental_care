@@ -36,6 +36,7 @@ Historia Clinica Para Odontologia.
     'data' : [
         #'security/ir.model.access.csv',
         'views/inherit_doctor_view.xml',
+        'views/doctor_co_prescripcion_medica.xml',
         'views/doctor_hc_odontologia_diente_view.xml',
         'data/doctor_hc_odontologia_diente_data.xml',
         'data/tipocita_odontologica.sql'

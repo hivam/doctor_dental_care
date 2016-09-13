@@ -175,12 +175,12 @@
 					
 					<page string="Prescripcion">
 						<separator string="Prescripción de Medicamentos" colspan="4"/>
-						<field name="prescripciones_ids"/>
+						<field name="prescripciones_ids" />
 					</page>
 					<page string="Recomendaciones">
 						<separator string="Recomendaciones" colspan="4"/>
 						<div>
-							<field name="recomendaciones_ids" widget="many2many_tags" placeholder="Recomendaciones"/>
+							<field name="recomendaciones_ids" widget="many2many_tags" placeholder="Recomendaciones" domain="[('tipo_plantilla', '=', '01')]"/>
 						</div>
 					</page>
 				</notebook>

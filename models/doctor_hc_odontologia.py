@@ -222,7 +222,7 @@ class doctor_hc_odontologia(osv.osv):
 		'diagnosticos_ids' : fields.one2many('doctor.hc.odontologia.odontograma', u'hc_odontologia_id', 'Odontograma Fields'),
 
 		'recomendaciones_ids': fields.one2many('doctor.attentions.recomendaciones', 'attentiont_id', 'Agregar Recomendaciones'),
-		'prescripciones_ids' : fields.one2many('doctor.prescription', 'attentiont_id', u'Prescripción Medicamentos', ondelete='restrict'),
+		'prescripciones_ids' : fields.one2many('doctor.simplified.prescription', 'attentiont_id', u'Prescripción Medicamentos', ondelete='restrict'),
 		'agregar_antecedente_ids': fields.one2many('doctor.hc.odontologia.antecedentes.pasado', 'attentiont_id', 'Agregar antecedente', ondelete='restrict'),
 		'antecedente_ids': fields.function(_get_past, relation="doctor.hc.odontologia.antecedentes.pasado", type="one2many", store=False,readonly=True, method=True, string="Antecedente"),
 
