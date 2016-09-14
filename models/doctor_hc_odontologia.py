@@ -188,21 +188,21 @@ class doctor_hc_odontologia(osv.osv):
 
 	_columns = {
 		#Examen fisico
-		'peso': fields.float('Peso (kg)'),
-		'frecuencia_cardiaca' : fields.integer('Frecuencia cardiaca'),
-		'frecuencia_respiratoria' : fields.integer('Frecuencia respiratoria'),
-		'sistolica' : fields.integer(u'Sistólica'),
-		'diastolica' : fields.integer(u'Diastólica'),
+		'peso': fields.float('Peso (kg)', states={'cerrada': [('readonly', True)]}),
+		'frecuencia_cardiaca' : fields.integer('Frecuencia cardiaca', states={'cerrada': [('readonly', True)]}),
+		'frecuencia_respiratoria' : fields.integer('Frecuencia respiratoria', states={'cerrada': [('readonly', True)]}),
+		'sistolica' : fields.integer(u'Sistólica', states={'cerrada': [('readonly', True)]}),
+		'diastolica' : fields.integer(u'Diastólica', states={'cerrada': [('readonly', True)]}),
 		#Examen Estomatologico
-		'examen_estomatologico_ids': fields.one2many('doctor.hc.odontologia.estomatologico', 'hc_odontologia_id','Examen estomatologico'),
-		'clasificacion_angle' : fields.selection([('1', 'I'), ('2', 'II/1'), ('3', 'II/2'), ('4', 'III')], 'Clasificacion de Angle'),
-		'indeterminable' : fields.boolean('Indeterminable'),
-		'habitos_orales' : fields.text('Habitos orales'),
-		'img_odontograma': fields.binary('Odontograma', readonly=True),
+		'examen_estomatologico_ids': fields.one2many('doctor.hc.odontologia.estomatologico', 'hc_odontologia_id','Examen estomatologico', states={'cerrada': [('readonly', True)]} ),
+		'clasificacion_angle' : fields.selection([('1', 'I'), ('2', 'II/1'), ('3', 'II/2'), ('4', 'III')], 'Clasificacion de Angle', states={'cerrada': [('readonly', True)]}),
+		'indeterminable' : fields.boolean('Indeterminable', states={'cerrada': [('readonly', True)]}),
+		'habitos_orales' : fields.text('Habitos orales', states={'cerrada': [('readonly', True)]}),
+		'img_odontograma': fields.binary('Odontograma', states={'cerrada': [('readonly', True)]}),
 		#Datos basicos
-		'patient_id': fields.many2one('doctor.patient', 'Paciente', ondelete='restrict'),
-		'patient_photo': fields.related('patient_id', 'photo', type="binary", relation="doctor.patient"),
-		'date_attention': fields.datetime(u'Fecha Atención', required=False),
+		'patient_id': fields.many2one('doctor.patient', 'Paciente', ondelete='restrict', states={'cerrada': [('readonly', True)]}),
+		'patient_photo': fields.related('patient_id', 'photo', type="binary", relation="doctor.patient",  readonly=True),
+		'date_attention': fields.datetime(u'Fecha Atención', required=False, states={'cerrada': [('readonly', True)]}),
 		'number': fields.char(u'Atención N°', select=1, size=32,
 							  help="Number of attention. Keep empty to get the number assigned by a sequence."),
 		'origin': fields.char('Source Document', size=64,
@@ -210,20 +210,20 @@ class doctor_hc_odontologia(osv.osv):
 		'age_attention': fields.integer('Current age', readonly=True),
 		'age_unit': fields.selection([('1', 'Years'), ('2', 'Months'), ('3', 'Days'), ], 'Unit of measure of age',
 									 readonly=True),
-		'professional_id': fields.many2one('doctor.professional', 'Médico', required=False),
+		'professional_id': fields.many2one('doctor.professional', 'Médico', required=False, states={'cerrada': [('readonly', True)]}),
 		'speciality': fields.related('professional_id', 'speciality_id', type="many2one", relation="doctor.speciality",
-									 string='Especialidad', required=False, store=True),
+									 string='Especialidad', required=False, store=True, states={'cerrada': [('readonly', True)]}),
 		'professional_photo': fields.related('professional_id', 'photo', type="binary", relation="doctor.professional",
 											 readonly=True, store=False),
 		#conclusiones
-		'analisis_atencion' : fields.text('Analisis', required=False),
+		'analisis_atencion' : fields.text('Analisis', required=False, states={'cerrada': [('readonly', True)]}),
 
 		# #odontograma
-		'diagnosticos_ids' : fields.one2many('doctor.hc.odontologia.odontograma', u'hc_odontologia_id', 'Odontograma Fields'),
+		'diagnosticos_ids' : fields.one2many('doctor.hc.odontologia.odontograma', u'hc_odontologia_id', 'Odontograma Fields', states={'cerrada': [('readonly', True)]}),
 
-		'recomendaciones_ids': fields.one2many('doctor.attentions.recomendaciones', 'attentiont_id', 'Agregar Recomendaciones'),
-		'prescripciones_ids' : fields.one2many('doctor.simplified.prescription', 'attentiont_id', u'Prescripción Medicamentos', ondelete='restrict'),
-		'agregar_antecedente_ids': fields.one2many('doctor.hc.odontologia.antecedentes.pasado', 'attentiont_id', 'Agregar antecedente', ondelete='restrict'),
+		'recomendaciones_ids': fields.one2many('doctor.attentions.recomendaciones', 'attentiont_id', 'Agregar Recomendaciones', states={'cerrada': [('readonly', True)]}),
+		'prescripciones_ids' : fields.one2many('doctor.simplified.prescription', 'attentiont_id', u'Prescripción Medicamentos', ondelete='restrict', states={'cerrada': [('readonly', True)]}),
+		'agregar_antecedente_ids': fields.one2many('doctor.hc.odontologia.antecedentes.pasado', 'attentiont_id', 'Agregar antecedente', ondelete='restrict', states={'cerrada': [('readonly', True)]}),
 		'antecedente_ids': fields.function(_get_past, relation="doctor.hc.odontologia.antecedentes.pasado", type="one2many", store=False,readonly=True, method=True, string="Antecedente"),
 
 		'state': fields.selection([('abierta', 'Abierta'), ('cerrada', 'Cerrada')], 'Estado', readonly=True, required=True),
