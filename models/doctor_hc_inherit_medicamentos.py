@@ -35,17 +35,13 @@ class doctor_prescription_co(osv.osv):
 				'attentiont_id': fields.many2one('doctor.attentions', u'Atención'),
 				'drugs_id': fields.many2one('doctor.drugs', 'Medicamento', required=True, ondelete='restrict'),
 				'total_quantity': fields.integer('Cantidad Total', required=True),
-				'measuring_unit_qt': fields.many2one('doctor.measuring.unit', 'Unidad de Medida', required=True,
-																						 ondelete='restrict'),
 				'action_id': fields.selection([
 																					('take', 'Tomar'),
 																					('inject', 'Inyectar'),
 																					('apply', 'Aplicar'),
 																					('inhale', 'Inhalar'),
 																			], 'Acción', required=True),
-				'quantity': fields.integer('Cantidad', required=True),
-				'measuring_unit_q': fields.many2one('doctor.measuring.unit', 'Unidad de Medida', required=True,
-																						ondelete='restrict'),
+
 				'frequency': fields.integer('Frecuencia (cada)', required=True),
 				'frequency_unit_n': fields.selection([
 																								 ('minutes', 'Minutos'),
@@ -65,8 +61,6 @@ class doctor_prescription_co(osv.osv):
 																							], 'Periodo', required=True),
 				'administration_route_id': fields.many2one('doctor.administration.route', 'Ruta Administración', required=True,
 																									 ondelete='restrict'),
-				'dose': fields.integer('Dosis', required=True),
-				'dose_unit_id': fields.many2one('doctor.dose.unit', 'Unidad', required=True, ondelete='restrict'),
 				'indications': fields.text('Indicaciones'),
 				'plantilla_id': fields.many2one('doctor.attentions.recomendaciones', 'Plantillas'),
 		}

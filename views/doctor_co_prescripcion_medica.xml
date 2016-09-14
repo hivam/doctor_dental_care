@@ -42,6 +42,7 @@
 		<field name="model">doctor.simplified.prescription</field>
 		<field name="arch" type="xml">
 			<tree string="Doctor HC Odontologia" version="7.0" create="true">
+				<field name="action_id" />
 				<field name="drugs_id" />
 			</tree>
 		</field>
