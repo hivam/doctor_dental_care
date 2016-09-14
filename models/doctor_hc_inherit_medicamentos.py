@@ -32,7 +32,7 @@ class doctor_prescription_co(osv.osv):
 		_rec_name = 'drugs_id'
 		
 		_columns = {
-				'attentiont_id': fields.many2one('doctor.attentions', u'Atención'),
+				'attentiont_id': fields.many2one('doctor.hc.odontologia', u'Atención', required=True),
 				'drugs_id': fields.many2one('doctor.drugs', 'Medicamento', required=True, ondelete='restrict'),
 				'total_quantity': fields.integer('Cantidad Total', required=True),
 				'action_id': fields.selection([
