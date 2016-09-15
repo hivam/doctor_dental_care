@@ -8,7 +8,7 @@
 		<field name="arch" type="xml">
 			<form string="Doctor HC Odontologia" version="7.0">
 				<header>
-                    <button string="Finalizar Atención" name="finalizar_atencion" states="abierta" type="object" class="oe_highlight"/>
+                    <button string="Finalizar Atención" name="finalizar_atencion" states="abierta" type="object" class="oe_highlight" groups="doctor.group_doctor_odontologo"/>
                     <field name="state" widget="statusbar" statusbar_visible="abierta,cerrada"/>
                 </header>
 				<group colspan='4' col='4'>
@@ -217,7 +217,7 @@
 	</record>
 
 	<!-- doctor Menu -->
-	 <menuitem name="Atenciones Odontología" id="menu_doctor_attentions_odontologia" action="action_doctor_hc_odontologia" parent="doctor.menu_doctor_process"  sequence="42"/>
+	 <menuitem name="Atenciones Odontología" id="menu_doctor_attentions_odontologia" action="action_doctor_hc_odontologia" parent="doctor.menu_doctor_process"  sequence="42" groups="doctor.group_doctor_odontologo,doctor.group_doctor_assistant"/>
  
 
 	</data>
