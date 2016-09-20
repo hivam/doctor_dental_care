@@ -51,6 +51,13 @@
 					</fieldset>
 					</group>
 				</group>
+				<fieldset class="fieldset_margen">
+					<legend class="texto_legend">Motivo Consulta / Enfermedad Actual</legend>
+					<group col="2">
+						<field name="motivo_consulta"/>
+						<field name="enfermedad_actual"/>
+					</group>		
+				</fieldset>
 				<!--EXAMENES-->
 				 <fieldset class="fieldset_margen">
 				<legend class="texto_legend">Exámenes</legend>

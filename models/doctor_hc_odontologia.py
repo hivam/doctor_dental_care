@@ -188,7 +188,7 @@ class doctor_hc_odontologia(osv.osv):
 
 	_columns = {
 		#Examen fisico
-		'peso': fields.float('Peso (kg)', states={'cerrada': [('readonly', True)]}),
+		'enfermedad_actual': fields.text('Enfermedad Actual', required=False, states={'cerrada': [('readonly', True)]}),
 		'frecuencia_cardiaca' : fields.integer('Frecuencia cardiaca', states={'cerrada': [('readonly', True)]}),
 		'frecuencia_respiratoria' : fields.integer('Frecuencia respiratoria', states={'cerrada': [('readonly', True)]}),
 		'sistolica' : fields.integer(u'Sistólica', states={'cerrada': [('readonly', True)]}),
@@ -205,11 +205,13 @@ class doctor_hc_odontologia(osv.osv):
 		'date_attention': fields.datetime(u'Fecha Atención', required=False, states={'cerrada': [('readonly', True)]}),
 		'number': fields.char(u'Atención N°', select=1, size=32,
 							  help="Number of attention. Keep empty to get the number assigned by a sequence."),
+		'motivo_consulta' : fields.char("Motivo de Consulta", size=100, required=False, states={'cerrada': [('readonly', True)]}),
 		'origin': fields.char('Source Document', size=64,
 							  help="Reference of the document that produced this attentiont.", readonly=True),
 		'age_attention': fields.integer('Current age', readonly=True),
 		'age_unit': fields.selection([('1', 'Years'), ('2', 'Months'), ('3', 'Days'), ], 'Unit of measure of age',
 									 readonly=True),
+		'peso': fields.float('Peso (kg)', states={'cerrada': [('readonly', True)]}),
 		'professional_id': fields.many2one('doctor.professional', 'Médico', required=False, states={'cerrada': [('readonly', True)]}),
 		'speciality': fields.related('professional_id', 'speciality_id', type="many2one", relation="doctor.speciality",
 									 string='Especialidad', required=False, store=True, states={'cerrada': [('readonly', True)]}),
