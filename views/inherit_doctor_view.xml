@@ -118,7 +118,7 @@
 									<field name="dientes_id"/>
 									<field name="superficie_diente"/>
 									<field name="diagnostico_odontologico_id" context="{'odontologia':'1'}"/>
-									<field name="procedimiento_id" context="{'odontologia':'1'}"/>
+									<field name="procedimiento_id" domain="[('procedure_type', '=', 7)]" context="{'odontologia':'1'}"/>
 								</tree>
 							</field>
 						</group>
