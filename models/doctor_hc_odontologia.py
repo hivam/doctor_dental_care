@@ -246,6 +246,13 @@ class doctor_hc_odontologia(osv.osv):
 	}
 
 
+	def import_file(self, cr, uid, ids, context=None):
+		fileobj = TemporaryFile('w+')
+		fileobj.write(base64.decodestring(data)) 
+
+		# your treatment
+		return True
+
 doctor_hc_odontologia()
 
 class doctor_hc_odontologia_estomatologico(osv.osv):
