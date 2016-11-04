@@ -68,6 +68,28 @@ class doctor_appointment(osv.osv):
 				'target' : 'current',
 			}
 
+
+		elif self.pool.get('doctor.doctor').modulo_instalado(cr, uid, 'doctor_biological_risk', context=context):	
+
+			if appointment_type == u'Riesgo Biologico':
+				result = data_obj._get_id(cr, uid, 'doctor_biological_risk', 'doctor_atencion_ries_bio_form_view')
+				view_id = data_obj.browse(cr, uid, result).res_id
+				context['default_patient_id'] = context.get('patient_id')
+				context['default_professional_id'] = profesional_id
+				return {
+					'type': 'ir.actions.act_window',
+					'view_type': 'form',
+					'view_mode': 'form',
+					'res_model': 'doctor.atencion.ries.bio',
+					'res_id': False,
+					'view_id': [view_id] or False,
+					'type': 'ir.actions.act_window',
+					'context' : context or None,
+					'nodestroy': True,
+					'target' : 'current',
+				}
+
+
 		else:
 			# Get view to show
 			result = data_obj._get_id(cr, uid, 'doctor', 'view_doctor_attentions_form')
