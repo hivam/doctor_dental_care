@@ -47,7 +47,7 @@ class doctor_appointment(osv.osv):
 		#GET model of the viewpg 
 		data_obj = self.pool.get('ir.model.data')
 
-		
+		_logger.info(appointment_type)		
 
 		#condition
 		if appointment_type == u'Odontológica':
@@ -81,6 +81,26 @@ class doctor_appointment(osv.osv):
 					'view_type': 'form',
 					'view_mode': 'form',
 					'res_model': 'doctor.atencion.ries.bio',
+					'res_id': False,
+					'view_id': [view_id] or False,
+					'type': 'ir.actions.act_window',
+					'context' : context or None,
+					'nodestroy': True,
+					'target' : 'current',
+				}
+
+		elif self.pool.get('doctor.doctor').modulo_instalado(cr, uid, 'doctor_psychology', context=context):
+
+			if appointment_type == u'Psicologia':
+				result = data_obj._get_id(cr, uid, 'doctor_psychology', 'doctor_psicologia_form_view')
+				view_id = data_obj.browse(cr, uid, result).res_id
+				context['default_patient_id'] = context.get('patient_id')
+				context['default_professional_id'] = profesional_id
+				return {
+					'type': 'ir.actions.act_window',
+					'view_type': 'form',
+					'view_mode': 'form',
+					'res_model': 'doctor.psicologia',
 					'res_id': False,
 					'view_id': [view_id] or False,
 					'type': 'ir.actions.act_window',
