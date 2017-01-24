@@ -91,7 +91,7 @@ class doctor_appointment(osv.osv):
 
 		elif self.pool.get('doctor.doctor').modulo_instalado(cr, uid, 'doctor_psychology', context=context):
 
-			if appointment_type == u'Psicologia':
+			if appointment_type.lower().find('psicologia') != -1 or appointment_type.lower().find(u'psicología') != -1:
 				result = data_obj._get_id(cr, uid, 'doctor_psychology', 'doctor_psicologia_form_view')
 				view_id = data_obj.browse(cr, uid, result).res_id
 				context['default_patient_id'] = context.get('patient_id')
