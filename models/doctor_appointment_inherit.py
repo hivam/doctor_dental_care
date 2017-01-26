@@ -95,6 +95,24 @@ class doctor_appointment(osv.osv):
 				'nodestroy': True,
 			}
 
+		if self.pool.get('doctor.doctor').modulo_instalado(cr, uid, 'doctor_control', context=context):
+			if tipo_historia == 'doctor_control'  :
+				attentiont_id = self.create_attentiont_control(cr, uid, doctor_appointment, self.pool.get('doctor.hc.control'), context=context)
+				result = data_obj._get_id(cr, uid, 'doctor_control', 'doctor_hc_control_form_view')
+				view_id = data_obj.browse(cr, uid, result).res_id
+				context['default_patient_id'] = context.get('patient_id')
+				context['default_professional_id'] = profesional_id
+				return {
+					'type': 'ir.actions.act_window',
+					'view_type': 'form',
+					'view_mode': 'form',
+					'res_model': 'doctor.hc.control',
+					'res_id': attentiont_id or False,
+					'view_id': [view_id] or False,
+					'type': 'ir.actions.act_window',
+					'context' : context or None,
+					'nodestroy': True,
+				}
 
 		if self.pool.get('doctor.doctor').modulo_instalado(cr, uid, 'doctor_biological_risk', context=context):	
 
