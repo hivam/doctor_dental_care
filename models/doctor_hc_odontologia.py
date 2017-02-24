@@ -293,11 +293,26 @@ class odontograma(osv.osv):
 	_columns = {
 		'hc_odontologia_id' : fields.many2one('doctor.hc.odontologia','Historia Clinica Odontologia'),
 		'diagnostico_odontologico_id' : fields.many2one('doctor.diseases', u'Diagnósticos', required=False),
-		'dientes_id' : fields.many2one('doctor.hc.odontologia.diente','Diente', required=True),
+		'diente' : fields.char('Diente', required=True),
 		'procedimiento_id' : fields.many2one('product.product', 'Procedimiento', required=False),
-		'superficie_diente' : fields.selection([('lingual', 'Lingual'), ('vestibular', 'Vestibular'), ('mesial', 'Mesial'), ('distal', 'Distal'), ('oclusal', 'Oclusal')], 'Superficie dental'),
+		'superficie_diente' : fields.char('Superficie dental'),
+		'fecha': fields.datetime('Fecha', readonly=True, store=True),
+		'nota' : fields.text('Nota'),
+		'plantilla_id': fields.many2one('doctor.attentions.recomendaciones', 'Plantillas'),
 	}
 
+	def onchange_plantillas(self, cr, uid, ids, plantilla_id, context=None):
+		res={'value':{}}
+		if plantilla_id:
+			cuerpo = self.pool.get('doctor.attentions.recomendaciones').browse(cr,uid,plantilla_id,context=context).cuerpo
+			res['value']['nota']=cuerpo
+		else:
+			res['value']['nota']=''
+		return res
+
+	_defaults = {
+		'fecha': lambda *a: datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+	}
 odontograma()
 
 class doctor_hc_odontologia_past(osv.osv):

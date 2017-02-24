@@ -112,13 +112,29 @@
 						<group>
 							<field name="img_odontograma" nolabel="1" widget="image" style="width: 265px; height: 100;" colspan="4"/>
 						</group>
+					</page>
+
+					<page string="Procedimientos">
 						<group>
 							<field name="diagnosticos_ids" nolabel="1">
-								<tree editable="bottom">
-									<field name="dientes_id"/>
+								<form string="Procedimientos">
+									<group>
+										<field name="fecha"/>
+										<field name="diente"/>
+										<field name="superficie_diente"/>
+										<field name="diagnostico_odontologico_id" context="{'odontologia':'1'}"/>
+										<field name="procedimiento_id" domain="[('procedure_type', '=', 7)]" context="{'odontologia':'1'}"/>
+										<field name="nota"/>
+										<field name="plantilla_id" on_change='onchange_plantillas(plantilla_id)' domain="[('tipo_plantilla', '=', '17')]"/>
+									</group>
+								</form>
+								<tree>
+									<field name="fecha"/>
+									<field name="diente"/>
 									<field name="superficie_diente"/>
 									<field name="diagnostico_odontologico_id" context="{'odontologia':'1'}"/>
 									<field name="procedimiento_id" domain="[('procedure_type', '=', 7)]" context="{'odontologia':'1'}"/>
+									<field name="nota"/>
 								</tree>
 							</field>
 						</group>
@@ -129,7 +145,7 @@
 			    <!--ANALISIS DE LA ATENCION-->
 			   
 				<fieldset class="fieldset_margen">
-				<legend class="texto_legend">Análisis</legend>
+				<legend class="texto_legend">Notas</legend>
 				<field name="analisis_atencion"/>
 				</fieldset>
 			    	
