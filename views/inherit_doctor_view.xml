@@ -51,13 +51,64 @@
 					</fieldset>
 					</group>
 				</group>
+				<group col="4" colspan="4">
+				<group col="2" colspan="2">
 				<fieldset class="fieldset_margen">
-					<legend class="texto_legend">Motivo Consulta / Enfermedad Actual</legend>
-					<group col="2">
+					<legend class="texto_legend">Motivo Consulta | Enfermedad Actual</legend>
+					<div>
+						<label for="motivo_consulta"/>
 						<field name="motivo_consulta"/>
+						<separator></separator>
+						<label for="enfermedad_actual"/>
 						<field name="enfermedad_actual"/>
-					</group>		
+					</div>		
 				</fieldset>
+				</group>
+				<!--ANTECEDENTES-->
+				<group col="2" colspan="2">
+				<fieldset class="fieldset_margen">
+				<legend class="texto_legend">Antecedentes | Agregar Antecedentes</legend>
+					<notebook>
+			    <page string="Antecedentes">
+				<separator string="Antecedentes" colspan="4"/>
+				<field name="antecedente_ids" nolabel="1" readonly="1" context="{'patient_id' : patient_id}">
+                	<tree string="Past" editable="top">
+                        <field name="attentiont_id" invisible="True" domain="[('attentiont_id', '&lt;', active_id)]"/>
+                        <field name="patient_id" invisible="True"/>
+                        <field name="categoria_antecedente"/>
+                        <field name="antecedente"/>
+                    </tree>
+                    <form string="Past">
+						<group>
+							<field name="attentiont_id" invisible="True" domain="[('attentiont_id', '&lt;', active_id)]"/>
+							<field name="patient_id" invisible="True"/>
+							<field name="categoria_antecedente"/>
+							<field name="antecedente"/>
+						</group>
+					</form>
+                </field>
+				</page>
+					<page string="Agregar Antecedente">
+						<separator string="Agregar Antecedente" colspan="4"/>
+						 <field name="agregar_antecedente_ids" nolabel="1" context="{'patient_id' : patient_id}">
+                                <tree string="Add Past" editable="top">
+                                    <field name="patient_id" invisible="True"/>
+                                    <field name="categoria_antecedente"/>
+                        			<field name="antecedente"/>
+                                </tree>
+                                <form string="Add Past">
+                                    <group>
+                                        <field name="patient_id" invisible="True"/>
+                                        <field name="categoria_antecedente"/>
+                        				<field name="antecedente"/>
+                                    </group>
+                                </form>
+                            </field>
+					</page>
+			    		</notebook>
+			    	</fieldset>
+			    	</group>
+			    </group>
 				<!--EXAMENES-->
 				 <fieldset class="fieldset_margen">
 				<legend class="texto_legend">Exámenes</legend>
@@ -149,52 +200,13 @@
 				<field name="analisis_atencion"/>
 				</fieldset>
 			    	
-				<group col="4" colspan="4">
-
-				<!--ANTECEDENTES-->
-				<group col="2" colspan="2">
-					<notebook>
-			    <page string="Antecedentes">
-				<separator string="Antecedentes" colspan="4"/>
-				<field name="antecedente_ids" nolabel="1" readonly="1" context="{'patient_id' : patient_id}">
-                	<tree string="Past" editable="top">
-                        <field name="attentiont_id" invisible="True" domain="[('attentiont_id', '&lt;', active_id)]"/>
-                        <field name="patient_id" invisible="True"/>
-                        <field name="categoria_antecedente"/>
-                        <field name="antecedente"/>
-                    </tree>
-                    <form string="Past">
-						<group>
-							<field name="attentiont_id" invisible="True" domain="[('attentiont_id', '&lt;', active_id)]"/>
-							<field name="patient_id" invisible="True"/>
-							<field name="categoria_antecedente"/>
-							<field name="antecedente"/>
-						</group>
-					</form>
-                </field>
-				</page>
-					<page string="Agregar Antecedente">
-						<separator string="Agregar Antecedente" colspan="4"/>
-						 <field name="agregar_antecedente_ids" nolabel="1" context="{'patient_id' : patient_id}">
-                                <tree string="Add Past" editable="top">
-                                    <field name="patient_id" invisible="True"/>
-                                    <field name="categoria_antecedente"/>
-                        			<field name="antecedente"/>
-                                </tree>
-                                <form string="Add Past">
-                                    <group>
-                                        <field name="patient_id" invisible="True"/>
-                                        <field name="categoria_antecedente"/>
-                        				<field name="antecedente"/>
-                                    </group>
-                                </form>
-                            </field>
-					</page>
-			    		</notebook>
-			    	</group>
-			    	<group col="2" colspan="2">
 				
-				<notebook colspan="4">
+
+				<fieldset class="fieldset_margen">
+				<legend class="texto_legend">Prescripción | Recomendaciones</legend>
+			    <group col="4" colspan="4">
+				<!--PRESCRIPCION Y RECOMENDACIONES-->
+				<notebook >
 					
 					<page string="Prescripcion">
 						<separator string="Prescripción de Medicamentos" colspan="4"/>
@@ -208,8 +220,7 @@
 					</page>
 				</notebook>
 				</group>
-				</group>
-				
+				</fieldset>
 				
 			</form>
 		</field>
