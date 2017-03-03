@@ -33,16 +33,16 @@ class doctor_prescription_co(osv.osv):
 		
 		_columns = {
 				'attentiont_id': fields.many2one('doctor.hc.odontologia', u'Atención', required=True),
-				'drugs_id': fields.many2one('doctor.drugs', 'Medicamento', required=True, ondelete='restrict'),
-				'total_quantity': fields.integer('Cantidad Total', required=True),
+				'drugs_id': fields.many2one('doctor.drugs', 'Medicamento', ondelete='restrict'),
+				'total_quantity': fields.integer('Cantidad Total',),
 				'action_id': fields.selection([
 																					('take', 'Tomar'),
 																					('inject', 'Inyectar'),
 																					('apply', 'Aplicar'),
 																					('inhale', 'Inhalar'),
-																			], 'Acción', required=True),
+																			], 'Acción'),
 
-				'frequency': fields.integer('Frecuencia (cada)', required=True),
+				'frequency': fields.integer('Frecuencia (cada)'),
 				'frequency_unit_n': fields.selection([
 																								 ('minutes', 'Minutos'),
 																								 ('hours', 'Horas'),
@@ -50,16 +50,16 @@ class doctor_prescription_co(osv.osv):
 																								 ('weeks', 'Semanas'),
 																								 ('wr', 'Cuando se Requiera'),
 																								 ('total', 'Total'),
-																						 ], 'Frecuencia', required=True),
-				'duration': fields.integer('Duración Tratamiento', required=True),
+																						 ], 'Frecuencia'),
+				'duration': fields.integer('Duración Tratamiento'),
 				'duration_period_n': fields.selection([
 																									('minutes', 'Minutos'),
 																									('hours', 'Horas'),
 																									('days', 'Dias'),
 																									('months', 'Meses'),
 																									('indefinite', 'Indefinido'),
-																							], 'Periodo', required=True),
-				'administration_route_id': fields.many2one('doctor.administration.route', 'Ruta Administración', required=True,
+																							], 'Periodo',),
+				'administration_route_id': fields.many2one('doctor.administration.route', 'Ruta Administración',
 																									 ondelete='restrict'),
 				'indications': fields.text('Indicaciones'),
 				'plantilla_id': fields.many2one('doctor.attentions.recomendaciones', 'Plantillas'),
