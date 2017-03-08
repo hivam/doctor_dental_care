@@ -26,14 +26,15 @@ import base64
 import sys, os
 
 
-class diente(osv.osv):
+class diente_temporal(osv.osv):
 	"""doctor_hc_odontologia_diente"""
-	_name = 'doctor.hc.odontologia.diente'
+
+	_name = 'doctor.hc.odontologia.diente_tempo'
 
 	_columns = {
-		'name' : fields.char(u'Número diente', size = 5 ,required =True),
+		'name' : fields.char(u'Número diente temporal', size = 5 ,required =True),
 	}
 
 	_sql_constraints = [('numerodiente_constraint', 'unique(numero_diente)', 'El número del diente que intenta crear ya existe en la base de datos.')]
 
-diente()
+diente_temporal()

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
 	<data>
-		<record model="ir.ui.view" id="doctor_hc_diente_form">
-      <field name="name">doctor.hc.odontologia.diente.form</field>
-      <field name="model">doctor.hc.odontologia.diente</field>
+	<record model="ir.ui.view" id="doctor_hc_diente_tempo_form">
+      <field name="name">doctor.hc.odontologia.diente.tempo.form</field>
+      <field name="model">doctor.hc.odontologia.diente_tempo</field>
       <field name="arch" type="xml">
-        <form string="Diente" version="7.0">
+        <form string="Diente Temporal" version="7.0">
           <sheet> 
             <fieldset>
               <field name="id" invisible="1"/>
@@ -21,25 +21,25 @@
     </record>
 
     <!-- Tree View -->
-    <record model="ir.ui.view" id="doctor_hc_diente_tree">
-      <field name="name">doctor.hc.odontologia.diente.tree</field>
-      <field name="model">doctor.hc.odontologia.diente</field>
+    <record model="ir.ui.view" id="doctor_hc_diente_tempo_tree">
+      <field name="name">doctor.hc.odontologia.diente.tempo.tree</field>
+      <field name="model">doctor.hc.odontologia.diente_tempo</field>
       <field name="arch" type="xml">
-        <tree string="Diente">
+        <tree string="Diente Temporal">
           <field name="name"/>
         </tree>
       </field>
     </record>
 
-    <record id="doctor_hc_odontologia_diente" model="ir.actions.act_window">
+    <record id="doctor_hc_odontologia_diente_tempo" model="ir.actions.act_window">
       <field name="name">Configuración de Dientes</field>
       <field name="type">ir.actions.act_window</field>
-      <field name="res_model">doctor.hc.odontologia.diente</field>
+      <field name="res_model">doctor.hc.odontologia.diente_tempo</field>
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem name="Configuración de Dientes" parent="doctor.menu_doctor_config" id="doctor_hc_odontologia_diente_menu" action="doctor_hc_odontologia_diente"/>
+    <menuitem name="Configuración de Dientes temporales" parent="doctor.menu_doctor_config" id="doctor_hc_odontologia_diente_tempo_menu" action="doctor_hc_odontologia_diente_tempo"/>
 
 	</data>
 </openerp>

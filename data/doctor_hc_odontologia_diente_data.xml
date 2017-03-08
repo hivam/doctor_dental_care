@@ -3,131 +3,99 @@
   <data noupdate="0">
     <record id="doctor_hc_odontologia_diente_0000001" model="doctor.hc.odontologia.diente">
         <field name="name">18</field>
-        <field name="descripcion_diente"></field>
     </record>
      <record id="doctor_hc_odontologia_diente_0000002" model="doctor.hc.odontologia.diente">
         <field name="name">17</field>
-        <field name="descripcion_diente"></field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000003" model="doctor.hc.odontologia.diente">
         <field name="name">16</field>
-        <field name="descripcion_diente"></field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000004" model="doctor.hc.odontologia.diente">
-        <field name="name">15/55</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">15</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000005" model="doctor.hc.odontologia.diente">
-        <field name="name">14/54</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">14</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000006" model="doctor.hc.odontologia.diente">
-        <field name="name">13/53</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">13</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000007" model="doctor.hc.odontologia.diente">
-        <field name="name">12/52</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">12</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000008" model="doctor.hc.odontologia.diente">
-        <field name="name">11/51</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">11</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000009" model="doctor.hc.odontologia.diente">
-        <field name="name">21/61</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">21</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000010" model="doctor.hc.odontologia.diente">
-        <field name="name">22/62</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">22</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000011" model="doctor.hc.odontologia.diente">
-        <field name="name">23/63</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">23</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000012" model="doctor.hc.odontologia.diente">
-        <field name="name">24/64</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">24</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000013" model="doctor.hc.odontologia.diente">
-        <field name="name">25/65</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">25</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000014" model="doctor.hc.odontologia.diente">
         <field name="name">26</field>
-        <field name="descripcion_diente"></field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000015" model="doctor.hc.odontologia.diente">
         <field name="name">27</field>
-        <field name="descripcion_diente"></field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000016" model="doctor.hc.odontologia.diente">
         <field name="name">28</field>
-        <field name="descripcion_diente"></field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000017" model="doctor.hc.odontologia.diente">
         <field name="name">38</field>
-        <field name="descripcion_diente"></field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000018" model="doctor.hc.odontologia.diente">
         <field name="name">37</field>
-        <field name="descripcion_diente"></field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000019" model="doctor.hc.odontologia.diente">
         <field name="name">36</field>
-        <field name="descripcion_diente"></field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000020" model="doctor.hc.odontologia.diente">
-        <field name="name">35/75</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">35</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000021" model="doctor.hc.odontologia.diente">
-        <field name="name">34/74</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">34</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000022" model="doctor.hc.odontologia.diente">
-        <field name="name">33/73</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">33</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000023" model="doctor.hc.odontologia.diente">
-        <field name="name">32/72</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">32</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000024" model="doctor.hc.odontologia.diente">
-        <field name="name">31/71</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">31</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000025" model="doctor.hc.odontologia.diente">
-        <field name="name">41/81</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">41</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000026" model="doctor.hc.odontologia.diente">
-        <field name="name">42/82</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">42</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000027" model="doctor.hc.odontologia.diente">
-        <field name="name">43/83</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">43</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000028" model="doctor.hc.odontologia.diente">
-        <field name="name">44/84</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">44</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000029" model="doctor.hc.odontologia.diente">
-        <field name="name">45/85</field>
-        <field name="descripcion_diente"></field>
+        <field name="name">45</field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000030" model="doctor.hc.odontologia.diente">
         <field name="name">46</field>
-        <field name="descripcion_diente"></field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000031" model="doctor.hc.odontologia.diente">
         <field name="name">47</field>
-        <field name="descripcion_diente"></field>
     </record>
     <record id="doctor_hc_odontologia_diente_0000032" model="doctor.hc.odontologia.diente">
         <field name="name">48</field>
-        <field name="descripcion_diente"></field>
     </record>
   </data>
 </openerp>

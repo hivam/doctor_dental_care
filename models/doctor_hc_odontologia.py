@@ -40,7 +40,6 @@ class doctor_hc_odontologia(osv.osv):
 
 	def default_get(self, cr, uid, fields, context=None):
 		res = super(doctor_hc_odontologia,self).default_get(cr, uid, fields, context=context)
-		
 
 		if context.get('active_model') == "doctor.patient":
 			id_paciente = context.get('default_patient_id')
@@ -123,6 +122,33 @@ class doctor_hc_odontologia(osv.osv):
 			counter+=1
 			result.append((0,0,line_data))
 		return result
+
+	def _get_default_dientes_permanentes(self, cr, uid, context=None):
+		modelo_diente = self.pool.get('doctor.hc.odontologia.diente')
+		dientes_ids = modelo_diente.search(cr, uid, [], context=context)
+		result= []
+		counter = 0
+		for lines in dientes_ids:
+			line_data = {
+				'diente_perma_id' : dientes_ids[counter],
+			}
+			counter+=1
+			result.append((0,0,line_data))
+		return result
+
+	def _get_default_dientes_temporales(self, cr, uid, context=None):
+		modelo_diente_tempo = self.pool.get('doctor.hc.odontologia.diente_tempo')
+		dientes_tempo_ids = modelo_diente_tempo.search(cr, uid, [], context=context)
+		result= []
+		counter = 0
+		for lines in dientes_tempo_ids:
+			line_data = {
+				'diente_temp_id' : dientes_tempo_ids[counter],
+			}
+			counter+=1
+			result.append((0,0,line_data))
+		return result
+
 
 	def on_change_indeterminable(self, cr, uid, ids, clasificacion_angle, context=None):
 		if context is None: context = {}
@@ -228,7 +254,11 @@ class doctor_hc_odontologia(osv.osv):
 		'agregar_antecedente_ids': fields.one2many('doctor.hc.odontologia.antecedentes.pasado', 'attentiont_id', 'Agregar antecedente', ondelete='restrict', states={'cerrada': [('readonly', True)]}),
 		'antecedente_ids': fields.function(_get_past, relation="doctor.hc.odontologia.antecedentes.pasado", type="one2many", store=False,readonly=True, method=True, string="Antecedente"),
 
-		'state': fields.selection([('abierta', 'Abierta'), ('cerrada', 'Cerrada')], 'Estado', readonly=True, required=True),
+		'dientes_permanentes_ids': fields.one2many('doctor.hc.odontologia_odonto_per', 'hc_odontologia_id','Dientes Permanentes', states={'cerrada': [('readonly', True)]} ),
+		'dientes_temporales_ids': fields.one2many('doctor.hc.odontologia_odonto_temp', 'hc_odontologia_id','Dientes Temporales', states={'cerrada': [('readonly', True)]} ),
+
+
+		'state': fields.selection([('abierta', 'Abierta'), ('cerrada', 'Cerrada')], 'Estado', readonly=True,	 required=True),
 	}
 
 	_constraints = [
@@ -239,6 +269,8 @@ class doctor_hc_odontologia(osv.osv):
 		'patient_id': lambda self, cr, uid, context: context.get('patient_id', False),
 		'img_odontograma': _get_default_signature,
 		'examen_estomatologico_ids': _get_default_estomatologicos,
+		'dientes_permanentes_ids' : _get_default_dientes_permanentes,
+		'dientes_temporales_ids': _get_default_dientes_temporales,
 		'date_attention': lambda *a: datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S"),
 		'habitos_orales' : 'No registra ...',
 		'analisis_atencion' :  'No registra ...',
@@ -254,6 +286,32 @@ class doctor_hc_odontologia(osv.osv):
 		return True
 
 doctor_hc_odontologia()
+
+class Odontograma_dientes_perma(osv.osv):
+
+	_name = 'doctor.hc.odontologia_odonto_per'
+
+	_columns = {
+		'hc_odontologia_id' : fields.many2one('doctor.hc.odontologia','Historia Clinica Odontologia'),
+		'diente_perma_id': fields.many2one('doctor.hc.odontologia.diente','Diente Permanente'),
+		'diagnostico_diente': fields.char('DX'),
+	}
+
+Odontograma_dientes_perma()
+
+class Odontograma_dientes_temp(osv.osv):
+
+	_name = 'doctor.hc.odontologia_odonto_temp'
+
+	_columns = {
+		'hc_odontologia_id' : fields.many2one('doctor.hc.odontologia','Historia Clinica Odontologia'),
+		'diente_temp_id': fields.many2one('doctor.hc.odontologia.diente_tempo','Diente Temporal'),
+		'diagnostico_diente': fields.char('DX'),
+	}
+
+
+Odontograma_dientes_temp()
+
 
 class doctor_hc_odontologia_estomatologico(osv.osv):
 	"""examen estomatologico  de hc odontologia"""

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="0">
+    <record id="doctor_hc_odontologia_diente_temp_0000001" model="doctor.hc.odontologia.diente_tempo">
+        <field name="name">55</field>
+    </record>
+     <record id="doctor_hc_odontologia_diente_temp_0000002" model="doctor.hc.odontologia.diente_tempo">
+        <field name="name">54</field>
+    </record>
+    <record id="doctor_hc_odontologia_diente_temp_0000003" model="doctor.hc.odontologia.diente_tempo">
+        <field name="name">53</field>
+    </record>
+    <record id="doctor_hc_odontologia_diente_temp_0000004" model="doctor.hc.odontologia.diente_tempo">
+        <field name="name">52</field>
+    </record>
+    <record id="doctor_hc_odontologia_diente_temp_0000005" model="doctor.hc.odontologia.diente_tempo">
+        <field name="name">51</field>
+    </record>
+    <record id="doctor_hc_odontologia_diente_temp_0000006" model="doctor.hc.odontologia.diente_tempo">
+        <field name="name">61</field>
+    </record>
+    <record id="doctor_hc_odontologia_diente_temp_0000007" model="doctor.hc.odontologia.diente_tempo">
+        <field name="name">62</field>
+    </record>
+    <record id="doctor_hc_odontologia_diente_temp_0000008" model="doctor.hc.odontologia.diente_tempo">
+        <field name="name">63</field>
+    </record>
+    <record id="doctor_hc_odontologia_diente_temp_0000009" model="doctor.hc.odontologia.diente_tempo">
+        <field name="name">64</field>
+    </record>
+    <record id="doctor_hc_odontologia_diente_temp_0000010" model="doctor.hc.odontologia.diente_tempo">
+        <field name="name">65</field>
+    </record>
+  </data>
+</openerp>

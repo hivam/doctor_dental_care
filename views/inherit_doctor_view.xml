@@ -163,6 +163,21 @@
 						<group>
 							<field name="img_odontograma" nolabel="1" widget="image" style="width: 265px; height: 100;" colspan="4"/>
 						</group>
+						<group colspan="6" col="4">
+							<field name="dientes_permanentes_ids" nolabel="1">
+								<tree editable="top">
+									<field name="diente_perma_id"/>
+									<field name="diagnostico_diente"/>
+								</tree>
+							</field>
+
+							<field name="dientes_temporales_ids" nolabel="1">
+								<tree editable="top">
+									<field name="diente_temp_id"/>
+									<field name="diagnostico_diente"/>
+								</tree>
+							</field>
+						</group>
 					</page>
 
 					<page string="Procedimientos">
