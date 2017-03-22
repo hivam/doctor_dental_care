@@ -44,8 +44,8 @@ class doctor_patient(osv.osv):
 			paciente_id = paciente.id
 			context['default_patient_id'] = paciente_id
 			context['default_professional_id'] = professional_id
-			context['default_age_attention'] = self.calcular_edad(paciente.birth_date)
-			context['default_age_unit'] = self.calcular_age_unit(paciente.birth_date)
+			context['default_age_attention'] = self.pool.get('doctor.attentions').calcular_edad(paciente.birth_date)
+			context['default_age_unit'] = self.pool.get('doctor.attentions').calcular_age_unit(paciente.birth_date)
 
 			return {
 				'type': 'ir.actions.act_window',
