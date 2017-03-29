@@ -111,7 +111,7 @@ class doctor_hc_odontologia(osv.osv):
 		return image
 
 	def _get_default_estomatologicos(self, cr, uid, context=None):
-		lista = ['LABIOS', 'LENGUA', 'PALADAR', 'GLAN. SALIVALES', 'FRENILLOS', 'MUCOSA ORAL', 'PISO DE BOCA', 'OROFARINGE', 'MUSCULOS', 'ATM']
+		lista = ['LABIOS', 'LENGUA', 'PALADAR', 'GLAN. SALIVALES', 'FRENILLOS', 'MUCOSA ORAL', 'PISO DE BOCA', 'OROFARINGE', 'MUSCULOS', 'ATM', 'ENCIA']
 		result= []
 		counter = 0
 		for lines in lista:
