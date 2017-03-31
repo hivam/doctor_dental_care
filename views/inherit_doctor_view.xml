@@ -147,8 +147,8 @@
 					   		<field name="examen_estomatologico_ids" nolabel="1">
 					   			<tree string="Examen Estomatológico" editable="bottom">
 					   				<field name="estructura" />
-									<field name="normal" />
-									<field name="anormal" />
+									<field name="normal" attrs="{'readonly': [('anormal','=', True)]}"/>
+									<field name="anormal" attrs="{'readonly': [('normal','=', True)]}"/>
 					   			</tree>
 					   		</field>
 					   	</group>
