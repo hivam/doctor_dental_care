@@ -8,6 +8,12 @@
 		<field name="arch" type="xml">
 			<form string="Doctor HC Odontologia" version="7.0">
 				<header>
+					<button string="Presupuesto"
+								class="oe_highlight"  
+                                name="borrador_presupuesto"
+                                type="object"
+                                states="abierta"
+                                />
                     <button string="Finalizar Atención" name="finalizar_atencion" states="abierta" type="object" class="oe_highlight" groups="doctor.group_doctor_odontologo"/>
                     <field name="state" widget="statusbar" statusbar_visible="abierta,cerrada"/>
                 </header>

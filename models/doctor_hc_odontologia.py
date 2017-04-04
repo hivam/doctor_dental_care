@@ -212,6 +212,37 @@ class doctor_hc_odontologia(osv.osv):
 		})
 		return {'value': values}
 
+	def borrador_presupuesto(self, cr, uid, ids, context):
+		partner_id = False
+		patient_id = False
+		for datos in self.browse(cr, uid, ids, context):
+			partner_id = datos.patient_id.patient.id
+			patient_id = datos.patient_id.id
+			appointment_id = self.pool.get('doctor.appointment').search(cr, uid, [('number', '=', str(datos.origin))], context=context)
+			for datos1 in self.pool.get('doctor.appointment').browse(cr, uid, appointment_id, context):
+				procedures_id= datos1.procedures_id
+
+		return({
+			'context' : {
+			'default_partner_id' : partner_id,
+			'default_patient_id' : patient_id,
+			
+			},
+			'type': 'ir.actions.act_window',
+	        'name': u'Presupuesto',
+	        'view_type': 'form',
+	        'view_mode': 'tree,form',
+	        'res_model': 'sale.order',
+	        'target' : 'new',
+	        'res_id' :  False,
+	        'views' : [(False, 'form'),(False, 'tree')],
+	        'nodestroy': True,
+	        'flags': {
+	        	'action_buttons': True, 
+	        	'sidebar' : True
+	        	}
+			})
+
 	_columns = {
 		#Examen fisico
 		'enfermedad_actual': fields.text('Enfermedad Actual', required=False, states={'cerrada': [('readonly', True)]}),
