@@ -325,15 +325,8 @@ class doctor_hc_odontologia_estomatologico(osv.osv):
 		'anormal' : fields.boolean('Anormal'),
 	}
 
-	#Valida que no haya una evaluacion normal y anormal al mismo tiempo.
-	def _validar_estadoestructura(self, cr, uid, ids, context=None):
-		for record in self.browse(cr, uid, ids):
-			if record.normal and record.anormal:
-				return False
-			return True
 
 	_constraints = [
-		(_validar_estadoestructura, u'\n\nDESCRIPCIÓN DETALLADA\nHay una estructura con estado normal y anormal al mismo tiempo', [u'examen estomatológico'])	
 	]
 
 
