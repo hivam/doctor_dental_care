@@ -48,8 +48,10 @@ class doctor_hc_odontologia(osv.osv):
 
 		if id_paciente:    
 			fecha_nacimiento = self.pool.get('doctor.patient').browse(cr,uid,id_paciente,context=context).birth_date
+			ref = self.pool.get('doctor.patient').browse(cr,uid,id_paciente,context=context).ref
 			res['age_attention'] = self.calcular_edad(fecha_nacimiento)
 			res['age_unit'] = self.calcular_age_unit(fecha_nacimiento)
+			res['ref'] = ref
 
 		return res
 
@@ -237,6 +239,7 @@ class doctor_hc_odontologia(osv.osv):
 		'age_attention': fields.integer('Current age', readonly=True),
 		'age_unit': fields.selection([('1', 'Years'), ('2', 'Months'), ('3', 'Days'), ], 'Unit of measure of age',
 									 readonly=True),
+		'ref': fields.char('Identificacion', readonly=True),
 		'peso': fields.float('Peso (kg)', states={'cerrada': [('readonly', True)]}),
 		'professional_id': fields.many2one('doctor.professional', 'Médico', required=False, states={'cerrada': [('readonly', True)]}),
 		'speciality': fields.related('professional_id', 'speciality_id', type="many2one", relation="doctor.speciality",
