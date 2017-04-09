@@ -38,6 +38,32 @@ class doctor_hc_odontologia(osv.osv):
 			vals['number'] = self.pool.get('ir.sequence').get(cr, uid, 'attention.sequence')
 		return super(doctor_hc_odontologia, self).create(cr, uid, vals, context=context)
 
+
+	def tipo_documento(self, tipo):
+
+		nombre_tipo = None
+
+		if tipo == '13':
+			nombre_tipo = 'CC'
+		elif tipo == '11':
+			nombre_tipo = 'RC'
+		elif tipo == '12':
+			nombre_tipo = 'TI'
+		elif tipo == '21':
+			nombre_tipo = 'CE'
+		elif tipo == '41':
+			nombre_tipo = 'Pasaporte'
+		elif tipo == 'NU':
+			nombre_tipo = 'NU'
+		elif tipo == 'AS':
+			nombre_tipo = 'AS'
+		elif tipo == 'MS':
+			nombre_tipo = 'MS'
+
+		return nombre_tipo
+
+
+
 	def default_get(self, cr, uid, fields, context=None):
 		res = super(doctor_hc_odontologia,self).default_get(cr, uid, fields, context=context)
 
@@ -49,9 +75,12 @@ class doctor_hc_odontologia(osv.osv):
 		if id_paciente:    
 			fecha_nacimiento = self.pool.get('doctor.patient').browse(cr,uid,id_paciente,context=context).birth_date
 			ref = self.pool.get('doctor.patient').browse(cr,uid,id_paciente,context=context).ref
+			tdoc = self.pool.get('doctor.patient').browse(cr,uid,id_paciente,context=context).tdoc
 			res['age_attention'] = self.calcular_edad(fecha_nacimiento)
 			res['age_unit'] = self.calcular_age_unit(fecha_nacimiento)
 			res['ref'] = ref
+			_logger.info(tdoc)
+			res['tdoc'] = self.tipo_documento(tdoc)
 
 		return res
 
@@ -240,6 +269,7 @@ class doctor_hc_odontologia(osv.osv):
 		'age_unit': fields.selection([('1', 'Years'), ('2', 'Months'), ('3', 'Days'), ], 'Unit of measure of age',
 									 readonly=True),
 		'ref': fields.char('Identificacion', readonly=True),
+		'tdoc': fields.char('tdoc', readonly=True),
 		'peso': fields.float('Peso (kg)', states={'cerrada': [('readonly', True)]}),
 		'professional_id': fields.many2one('doctor.professional', 'Médico', required=False, states={'cerrada': [('readonly', True)]}),
 		'speciality': fields.related('professional_id', 'speciality_id', type="many2one", relation="doctor.speciality",
