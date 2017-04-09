@@ -72,7 +72,7 @@
 				<group col="2" colspan="2">
 				<fieldset class="fieldset_margen">
 				<legend class="texto_legend">Antecedentes | Agregar Antecedentes</legend>
-					<notebook>
+				<notebook>
 			    <page string="Antecedentes">
 				<separator string="Antecedentes" colspan="4"/>
 				<field name="antecedente_ids" nolabel="1" readonly="1" context="{'patient_id' : patient_id}">
@@ -167,46 +167,95 @@
 						<group>
 							<field name="img_odontograma" nolabel="1" widget="image" style="width: 265px; height: 100;" colspan="4"/>
 						</group>
-						<group colspan="6" col="4">
-							<field name="dientes_permanentes_ids" nolabel="1">
-								<tree editable="top">
-									<field name="diente_perma_id"/>
-									<field name="diagnostico_diente"/>
-								</tree>
-							</field>
+						<notebook>
+								
+							<page string="Antecedentes Odontograma Permanentes">
+								<field name="antecedentes_dientes_permanentes_ids" nolabel="1">
+									<tree editable="top">
+										<field name="patient_id" invisible="True"/>
+										<field name="diente_perma_id"/>
+										<field name="diagnostico_diente"/>
+									</tree>
+								</field>
+							</page>
 
-							<field name="dientes_temporales_ids" nolabel="1">
-								<tree editable="top">
-									<field name="diente_temp_id"/>
-									<field name="diagnostico_diente"/>
-								</tree>
-							</field>
-						</group>
+							<page string="Antecedentes Odontograma Temporales">
+								<field name="antecedentes_dientes_temporales_ids" nolabel="1">
+									<tree editable="top">
+										<field name="patient_id" invisible="True"/>
+										<field name="diente_temp_id"/>
+										<field name="diagnostico_diente"/>
+									</tree>
+								</field>
+							</page>
+
+						</notebook>
+
+							<notebook>
+								<page string="Odontograma Permanentes" context="{'patient_id' : patient_id}">
+									<field name="dientes_permanentes_ids" nolabel="1">
+										<tree editable="top">
+											<field name="diente_perma_id"/>
+											<field name="diagnostico_diente"/>
+										</tree>
+									</field>
+								</page>
+
+								<page string="Odontograma Temporales" context="{'patient_id' : patient_id}">
+									<field name="dientes_temporales_ids" nolabel="1">
+										<tree editable="top">
+											<field name="diente_temp_id"/>
+											<field name="diagnostico_diente"/>
+										</tree>
+									</field>
+								</page>
+
+							</notebook>
 					</page>
 
 					<page string="Procedimientos">
 						<group>
-							<field name="diagnosticos_ids" nolabel="1">
-								<form string="Procedimientos">
-									<group>
-										<field name="fecha"/>
-										<field name="diente"/>
-										<field name="superficie_diente"/>
-										<field name="diagnostico_odontologico_id" context="{'odontologia':'1'}"/>
-										<field name="procedimiento_id" domain="[('procedure_type', '=', 7)]" context="{'odontologia':'1'}"/>
-										<field name="nota"/>
-										<field name="plantilla_id" on_change='onchange_plantillas(plantilla_id)' domain="[('tipo_plantilla', '=', '17')]"/>
-									</group>
-								</form>
-								<tree>
-									<field name="fecha"/>
-									<field name="diente"/>
-									<field name="superficie_diente"/>
-									<field name="diagnostico_odontologico_id" context="{'odontologia':'1'}"/>
-									<field name="procedimiento_id" domain="[('procedure_type', '=', 7)]" context="{'odontologia':'1'}"/>
-									<field name="nota"/>
-								</tree>
-							</field>
+							
+							<notebook>
+								<page string='Antecedentes procedimientos'>
+									<field name="antecedentes_procedimientos_ids" nolabel="1" context="{'patient_id' : patient_id}">
+										<tree>
+											<field name="fecha"/>
+											<field name="diente"/>
+											<field name="superficie_diente"/>
+											<field name="diagnostico_odontologico_id" context="{'odontologia':'1'}"/>
+											<field name="procedimiento_id" domain="[('procedure_type', '=', 7)]" context="{'odontologia':'1'}"/>
+											<field name="nota"/>
+										</tree>
+									</field>
+								</page>
+
+								<page string="Agregar procedimientos">
+									<field name="diagnosticos_ids" nolabel="1" context="{'patient_id' : patient_id}">
+										<form string="Procedimientos">
+											<group>
+												<field name="fecha"/>
+												<field name="diente"/>
+												<field name="superficie_diente"/>
+												<field name="diagnostico_odontologico_id" context="{'odontologia':'1'}"/>
+												<field name="procedimiento_id" domain="[('procedure_type', '=', 7)]" context="{'odontologia':'1'}"/>
+												<field name="nota"/>
+												<field name="plantilla_id" on_change='onchange_plantillas(plantilla_id)' domain="[('tipo_plantilla', '=', '17')]"/>
+											</group>
+										</form>
+										<tree>
+											<field name="fecha"/>
+											<field name="diente"/>
+											<field name="superficie_diente"/>
+											<field name="diagnostico_odontologico_id" context="{'odontologia':'1'}"/>
+											<field name="procedimiento_id" domain="[('procedure_type', '=', 7)]" context="{'odontologia':'1'}"/>
+											<field name="nota"/>
+										</tree>
+									</field>
+								</page>
+							</notebook>
+
+
 						</group>
 					</page>
 				</notebook>

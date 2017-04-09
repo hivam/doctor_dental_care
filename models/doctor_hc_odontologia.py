@@ -236,6 +236,15 @@ class doctor_hc_odontologia(osv.osv):
 			return values
 		past = self.pool.get('doctor.hc.odontologia.antecedentes.pasado').search(cr, uid, [('patient_id', '=', patient_id)],
 															  order='id asc')
+
+		dientes_temporales_past = self.pool.get('doctor.hc.odontologia_odonto_temp').search(cr, uid, [('diagnostico_diente', '<>', None), 
+											('patient_id', '=', patient_id)], context=context)
+
+		dientes_permanentes_past = self.pool.get('doctor.hc.odontologia_odonto_per').search(cr, uid, [('diagnostico_diente', '<>', None), 
+											('patient_id', '=', patient_id)], context=context) 
+
+
+		procedimientos_past = self.pool.get('doctor.hc.odontologia.odontograma').search(cr, uid, [('patient_id', '=', patient_id)], context=context) 
 		
 		patient_data = self.pool.get('doctor.patient').browse(cr, uid, patient_id, context=context)
 		photo_patient = patient_data.photo
@@ -243,6 +252,9 @@ class doctor_hc_odontologia(osv.osv):
 		values.update({
 			'patient_photo': photo_patient,
 			'antecedente_ids': past,
+			'antecedentes_dientes_temporales_ids': dientes_temporales_past,
+			'antecedentes_dientes_permanentes_ids': dientes_permanentes_past,
+			'antecedentes_procedimientos_ids': procedimientos_past,
 		})
 		return {'value': values}
 
@@ -262,6 +274,27 @@ class doctor_hc_odontologia(osv.osv):
 			'professional_photo': professional_img,
 		})
 		return {'value': values}
+
+
+	def _get_dientes_temporales(self, cr, uid, ids, field_name, arg, context=None):
+		res = {}
+		for datos in self.browse(cr, uid, ids):
+			res[datos.id] = self.pool.get('doctor.hc.odontologia_odonto_temp').search(cr, uid, [('diagnostico_diente', '<>', None),('hc_odontologia_id', '<=', datos.id), ('patient_id', '=', datos.patient_id.id)], context=context)
+		return res
+
+	def _get_dientes_permanentes(self, cr, uid, ids, field_name, arg, context=None):
+		res = {}
+		for datos in self.browse(cr, uid, ids):
+			res[datos.id] = self.pool.get('doctor.hc.odontologia_odonto_per').search(cr, uid, [('diagnostico_diente', '<>', None),('hc_odontologia_id', '<=', datos.id), ('patient_id', '=', datos.patient_id.id)], context=context)
+		return res
+
+	def _get_procedimientos(self, cr, uid, ids, field_name, arg, context=None):
+		res = {}
+		for datos in self.browse(cr, uid, ids):
+			res[datos.id] = self.pool.get('doctor.hc.odontologia.odontograma').search(cr, uid, [('hc_odontologia_id', '<=', datos.id), ('patient_id', '=', datos.patient_id.id)], context=context)
+		return res
+
+
 
 	_columns = {
 		#Examen fisico
@@ -312,6 +345,17 @@ class doctor_hc_odontologia(osv.osv):
 
 
 		'state': fields.selection([('abierta', 'Abierta'), ('cerrada', 'Cerrada')], 'Estado', readonly=True,	 required=True),
+
+		'antecedentes_dientes_temporales_ids': fields.function(_get_dientes_temporales, relation="doctor.hc.odontologia_odonto_temp", type="one2many", store=False,
+										  readonly=True, method=True, string="Antecedente Odontograma Temporales"),
+
+		'antecedentes_dientes_permanentes_ids': fields.function(_get_dientes_permanentes, relation="doctor.hc.odontologia_odonto_per", type="one2many", store=False,
+										  readonly=True, method=True, string="Antecedente Odontograma Permanentes"),
+
+		'antecedentes_procedimientos_ids': fields.function(_get_procedimientos, relation="doctor.hc.odontologia.odontograma", type="one2many", store=False,
+										  readonly=True, method=True, string="Antecedente Procedimientos"),
+
+
 	}
 
 	_constraints = [
@@ -348,7 +392,25 @@ class Odontograma_dientes_perma(osv.osv):
 		'hc_odontologia_id' : fields.many2one('doctor.hc.odontologia','Historia Clinica Odontologia'),
 		'diente_perma_id': fields.many2one('doctor.hc.odontologia.diente','Diente Permanente'),
 		'diagnostico_diente': fields.char('DX'),
+		'patient_id': fields.many2one('doctor.patient', 'Paciente', ondelete='restrict'),
 	}
+
+	_defaults = {
+		'patient_id': lambda self, cr, uid, context: context.get('patient_id', False),
+	}
+
+	def create(self, cr, uid, vals, context=None):
+		
+		if 'active_ids' in context:
+
+			patient_id = context.get('active_ids')[0]
+
+			if patient_id:
+
+				vals['patient_id'] = patient_id
+
+		dientes_perma_past = super(Odontograma_dientes_perma,self).create(cr, uid, vals, context)
+		return dientes_perma_past
 
 Odontograma_dientes_perma()
 
@@ -360,7 +422,26 @@ class Odontograma_dientes_temp(osv.osv):
 		'hc_odontologia_id' : fields.many2one('doctor.hc.odontologia','Historia Clinica Odontologia'),
 		'diente_temp_id': fields.many2one('doctor.hc.odontologia.diente_tempo','Diente Temporal'),
 		'diagnostico_diente': fields.char('DX'),
+		'patient_id': fields.many2one('doctor.patient', 'Paciente', ondelete='restrict'),
 	}
+
+	_defaults = {
+		'patient_id': lambda self, cr, uid, context: context.get('patient_id', False),
+	}
+
+
+	def create(self, cr, uid, vals, context=None):
+		_logger.info(vals)
+		if 'active_ids' in context:
+
+			patient_id = context.get('active_ids')[0]
+
+			if patient_id:
+
+				vals['patient_id'] = patient_id
+
+		dientes_temporales_past = super(Odontograma_dientes_temp,self).create(cr, uid, vals, context)
+		return dientes_temporales_past
 
 
 Odontograma_dientes_temp()
@@ -403,6 +484,7 @@ class odontograma(osv.osv):
 		'fecha': fields.datetime('Fecha', readonly=True, store=True),
 		'nota' : fields.text('Nota'),
 		'plantilla_id': fields.many2one('doctor.attentions.recomendaciones', 'Plantillas'),
+		'patient_id': fields.many2one('doctor.patient', 'Paciente', ondelete='restrict'),
 	}
 
 	def onchange_plantillas(self, cr, uid, ids, plantilla_id, context=None):
@@ -416,7 +498,23 @@ class odontograma(osv.osv):
 
 	_defaults = {
 		'fecha': lambda *a: datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+		'patient_id': lambda self, cr, uid, context: context.get('patient_id', False),
 	}
+
+
+	def create(self, cr, uid, vals, context=None):
+		
+		if 'active_ids' in context:
+
+			patient_id = context.get('active_ids')[0]
+
+			if patient_id:
+
+				vals['patient_id'] = patient_id
+
+		dientes_temporales_past = super(odontograma,self).create(cr, uid, vals, context)
+		return dientes_temporales_past
+
 odontograma()
 
 class doctor_hc_odontologia_past(osv.osv):
