@@ -63,14 +63,22 @@ class doctor_hc_odontologia(osv.osv):
 		return nombre_tipo
 
 
+	def obtener_paciente(self, context):
 
-	def default_get(self, cr, uid, fields, context=None):
-		res = super(doctor_hc_odontologia,self).default_get(cr, uid, fields, context=context)
+		id_paciente = None
 
 		if context.get('active_model') == "doctor.patient":
 			id_paciente = context.get('default_patient_id')
 		else:
 			id_paciente = context.get('patient_id')
+
+		return id_paciente	
+
+
+	def default_get(self, cr, uid, fields, context=None):
+		res = super(doctor_hc_odontologia,self).default_get(cr, uid, fields, context=context)
+
+		id_paciente = self.obtener_paciente(context)
 
 		if id_paciente:    
 			fecha_nacimiento = self.pool.get('doctor.patient').browse(cr,uid,id_paciente,context=context).birth_date
@@ -79,7 +87,6 @@ class doctor_hc_odontologia(osv.osv):
 			res['age_attention'] = self.calcular_edad(fecha_nacimiento)
 			res['age_unit'] = self.calcular_age_unit(fecha_nacimiento)
 			res['ref'] = ref
-			_logger.info(tdoc)
 			res['tdoc'] = self.tipo_documento(tdoc)
 
 		return res
@@ -159,10 +166,17 @@ class doctor_hc_odontologia(osv.osv):
 		dientes_ids = modelo_diente.search(cr, uid, [], context=context)
 		result= []
 		counter = 0
+		patient_id = self.obtener_paciente(context)
+		fecha_nacimiento = self.pool.get('doctor.patient').browse(cr,uid,patient_id,context=context).birth_date
+		edad = self.calcular_edad(fecha_nacimiento)
 		for lines in dientes_ids:
 			line_data = {
 				'diente_perma_id' : dientes_ids[counter],
 			}
+
+			if edad > 9:
+				line_data['diagnostico_diente'] = 'Sano'
+
 			counter+=1
 			result.append((0,0,line_data))
 		return result
@@ -172,10 +186,16 @@ class doctor_hc_odontologia(osv.osv):
 		dientes_tempo_ids = modelo_diente_tempo.search(cr, uid, [], context=context)
 		result= []
 		counter = 0
+		patient_id = self.obtener_paciente(context)
+		fecha_nacimiento = self.pool.get('doctor.patient').browse(cr,uid,patient_id,context=context).birth_date
+		edad = self.calcular_edad(fecha_nacimiento)
 		for lines in dientes_tempo_ids:
 			line_data = {
 				'diente_temp_id' : dientes_tempo_ids[counter],
 			}
+
+			if edad <= 9:
+				line_data['diagnostico_diente'] = 'Sano'
 			counter+=1
 			result.append((0,0,line_data))
 		return result
