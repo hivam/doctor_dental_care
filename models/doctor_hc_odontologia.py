@@ -155,7 +155,6 @@ class doctor_hc_odontologia(osv.osv):
 		for lines in lista:
 			line_data = {
 					'estructura' : lista[counter],
-					'normal' : True
 			}
 			counter+=1
 			result.append((0,0,line_data))
