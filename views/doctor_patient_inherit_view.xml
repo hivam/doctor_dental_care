@@ -13,6 +13,20 @@
           <button class="oe_highlight" help="Atender Paciente Odontodologia." string="Atender paciente odontodologia" name="atender_paciente_odontologia" type="object" groups="doctor.group_doctor_odontologo" icon="terp-personal"/>
         </xpath>
 
+
+        <xpath expr="/form[@string='Patient']/sheet/notebook[@colspan='4']" position="inside">
+          <page string="Atenciones Odontologia">
+            <field name="attentions_odontologia_ids" nolabel="1" readonly="1">
+              <tree string="Atenciones">
+                <field name="professional_id"/>
+                <field name="speciality"/>
+                <field name="date_attention"/>
+                <field name="state"/>
+              </tree>
+            </field>
+          </page>
+        </xpath>
+
       </field>
     </record>
   </data>

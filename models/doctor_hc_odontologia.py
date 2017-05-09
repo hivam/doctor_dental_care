@@ -31,6 +31,7 @@ class doctor_hc_odontologia(osv.osv):
 	"""doctor_hc_odontologia"""
 	_name = 'doctor.hc.odontologia'
 	_description = 'doctor hc de odontologia'
+	_order = "date_attention desc"
 
 	def create(self, cr, uid, vals, context=None):
 		# Set number if empty
@@ -39,28 +40,7 @@ class doctor_hc_odontologia(osv.osv):
 		return super(doctor_hc_odontologia, self).create(cr, uid, vals, context=context)
 
 
-	def tipo_documento(self, tipo):
 
-		nombre_tipo = None
-
-		if tipo == '13':
-			nombre_tipo = 'CC'
-		elif tipo == '11':
-			nombre_tipo = 'RC'
-		elif tipo == '12':
-			nombre_tipo = 'TI'
-		elif tipo == '21':
-			nombre_tipo = 'CE'
-		elif tipo == '41':
-			nombre_tipo = 'Pasaporte'
-		elif tipo == 'NU':
-			nombre_tipo = 'NU'
-		elif tipo == 'AS':
-			nombre_tipo = 'AS'
-		elif tipo == 'MS':
-			nombre_tipo = 'MS'
-
-		return nombre_tipo
 
 
 	def obtener_paciente(self, context):
@@ -87,7 +67,7 @@ class doctor_hc_odontologia(osv.osv):
 			res['age_attention'] = self.calcular_edad(fecha_nacimiento)
 			res['age_unit'] = self.calcular_age_unit(fecha_nacimiento)
 			res['ref'] = ref
-			res['tdoc'] = self.tipo_documento(tdoc)
+			res['tdoc'] = self.pool.ge('doctor.doctor').tipo_documento(tdoc)
 
 		return res
 
@@ -235,14 +215,6 @@ class doctor_hc_odontologia(osv.osv):
 			return values
 		past = self.pool.get('doctor.hc.odontologia.antecedentes.pasado').search(cr, uid, [('patient_id', '=', patient_id)],
 															  order='id asc')
-
-		dientes_temporales_past = self.pool.get('doctor.hc.odontologia_odonto_temp').search(cr, uid, [('diagnostico_diente', '<>', None), 
-											('patient_id', '=', patient_id)], context=context)
-
-		dientes_permanentes_past = self.pool.get('doctor.hc.odontologia_odonto_per').search(cr, uid, [('diagnostico_diente', '<>', None), 
-											('patient_id', '=', patient_id)], context=context) 
-
-
 		procedimientos_past = self.pool.get('doctor.hc.odontologia.odontograma').search(cr, uid, [('patient_id', '=', patient_id)], context=context) 
 		
 		patient_data = self.pool.get('doctor.patient').browse(cr, uid, patient_id, context=context)
@@ -251,8 +223,6 @@ class doctor_hc_odontologia(osv.osv):
 		values.update({
 			'patient_photo': photo_patient,
 			'antecedente_ids': past,
-			'antecedentes_dientes_temporales_ids': dientes_temporales_past,
-			'antecedentes_dientes_permanentes_ids': dientes_permanentes_past,
 			'antecedentes_procedimientos_ids': procedimientos_past,
 		})
 		return {'value': values}
@@ -274,18 +244,6 @@ class doctor_hc_odontologia(osv.osv):
 		})
 		return {'value': values}
 
-
-	def _get_dientes_temporales(self, cr, uid, ids, field_name, arg, context=None):
-		res = {}
-		for datos in self.browse(cr, uid, ids):
-			res[datos.id] = self.pool.get('doctor.hc.odontologia_odonto_temp').search(cr, uid, [('diagnostico_diente', '<>', None),('hc_odontologia_id', '<=', datos.id), ('patient_id', '=', datos.patient_id.id)], context=context)
-		return res
-
-	def _get_dientes_permanentes(self, cr, uid, ids, field_name, arg, context=None):
-		res = {}
-		for datos in self.browse(cr, uid, ids):
-			res[datos.id] = self.pool.get('doctor.hc.odontologia_odonto_per').search(cr, uid, [('diagnostico_diente', '<>', None),('hc_odontologia_id', '<=', datos.id), ('patient_id', '=', datos.patient_id.id)], context=context)
-		return res
 
 	def _get_procedimientos(self, cr, uid, ids, field_name, arg, context=None):
 		res = {}
@@ -309,7 +267,7 @@ class doctor_hc_odontologia(osv.osv):
 		'habitos_orales' : fields.text('Habitos orales', states={'cerrada': [('readonly', True)]}),
 		'img_odontograma': fields.binary('Odontograma', states={'cerrada': [('readonly', True)]}),
 		#Datos basicos
-		'patient_id': fields.many2one('doctor.patient', 'Paciente', ondelete='restrict', states={'cerrada': [('readonly', True)]}),
+		'patient_id': fields.many2one('doctor.patient', 'Paciente', ondelete='restrict'),
 		'patient_photo': fields.related('patient_id', 'photo', type="binary", relation="doctor.patient",  readonly=True),
 		'date_attention': fields.datetime(u'Fecha Atención', required=False, states={'cerrada': [('readonly', True)]}),
 		'number': fields.char(u'Atención N°', select=1, size=32,
@@ -323,9 +281,9 @@ class doctor_hc_odontologia(osv.osv):
 		'ref': fields.char('Identificacion', readonly=True),
 		'tdoc': fields.char('tdoc', readonly=True),
 		'peso': fields.float('Peso (kg)', states={'cerrada': [('readonly', True)]}),
-		'professional_id': fields.many2one('doctor.professional', 'Médico', required=False, states={'cerrada': [('readonly', True)]}),
+		'professional_id': fields.many2one('doctor.professional', 'Médico', required=False),
 		'speciality': fields.related('professional_id', 'speciality_id', type="many2one", relation="doctor.speciality",
-									 string='Especialidad', required=False, store=True, states={'cerrada': [('readonly', True)]}),
+									 string='Especialidad', required=False, store=True),
 		'professional_photo': fields.related('professional_id', 'photo', type="binary", relation="doctor.professional",
 											 readonly=True, store=False),
 		#conclusiones
@@ -342,14 +300,7 @@ class doctor_hc_odontologia(osv.osv):
 		'dientes_permanentes_ids': fields.one2many('doctor.hc.odontologia_odonto_per', 'hc_odontologia_id','Dientes Permanentes', states={'cerrada': [('readonly', True)]} ),
 		'dientes_temporales_ids': fields.one2many('doctor.hc.odontologia_odonto_temp', 'hc_odontologia_id','Dientes Temporales', states={'cerrada': [('readonly', True)]} ),
 
-
-		'state': fields.selection([('abierta', 'Abierta'), ('cerrada', 'Cerrada')], 'Estado', readonly=True,	 required=True),
-
-		'antecedentes_dientes_temporales_ids': fields.function(_get_dientes_temporales, relation="doctor.hc.odontologia_odonto_temp", type="one2many", store=False,
-										  readonly=True, method=True, string="Antecedente Odontograma Temporales"),
-
-		'antecedentes_dientes_permanentes_ids': fields.function(_get_dientes_permanentes, relation="doctor.hc.odontologia_odonto_per", type="one2many", store=False,
-										  readonly=True, method=True, string="Antecedente Odontograma Permanentes"),
+		'state': fields.selection([('abierta', 'Abierta'), ('cerrada', 'Cerrada')], 'Estado', readonly=True, required=True),
 
 		'antecedentes_procedimientos_ids': fields.function(_get_procedimientos, relation="doctor.hc.odontologia.odontograma", type="one2many", store=False,
 										  readonly=True, method=True, string="Antecedente Procedimientos"),

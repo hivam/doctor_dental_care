@@ -32,9 +32,8 @@ class doctor_patient(osv.osv):
 
 	_inherit = 'doctor.patient'
 
-
 	_columns = {
-	
+		'attentions_odontologia_ids': fields.one2many('doctor.hc.odontologia', 'patient_id', 'Atenciones Odontologia'),
 	}
 
 
@@ -59,5 +58,19 @@ class doctor_patient(osv.osv):
 				'nodestroy': False,
 				'target': 'current'
 			}
+
+
+
+	def name_search(self, cr, uid, name, args=None, operator='ilike', context=None, limit=100):
+		args = args or []
+		ids = []
+		if name:
+			ids = self.search(cr, uid, [('ref', 'ilike', name)] + args, limit=limit, context=context)
+			if not ids:
+				ids = self.search(cr, uid, [('nombre', operator, name)] + args, limit=limit, context=context)
+		else:
+			ids = self.search(cr, uid, args, limit=limit, context=context)
+		return self.name_get(cr, uid, ids, context)
+
 
 doctor_patient()

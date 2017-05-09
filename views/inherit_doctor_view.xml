@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
 	<data>
+
+    <record id="appointmemnt_filter" model="ir.ui.view">
+	    <field name="name">Atenciones</field>
+	    <field name="model">doctor.hc.odontologia</field>
+	    <field name="arch" type="xml">
+	        <search string="Filtros Odontologia" version="7.0">
+	            <field name="patient_id"/>
+	            <field name="ref"/>
+	        </search>
+    </field>
+    </record>
+
+
 	<!-- doctor hc Odontologia Form View -->
 	<record model="ir.ui.view" id="view_doctor_hc_odonto_form">
 		<field name="name">Doctor HC Odontologia</field>
@@ -167,30 +180,6 @@
 						<group>
 							<field name="img_odontograma" nolabel="1" widget="image" style="width: 265px; height: 100;" colspan="4"/>
 						</group>
-						<notebook>
-								
-							<page string="Antecedentes Odontograma Permanentes">
-								<field name="antecedentes_dientes_permanentes_ids" nolabel="1">
-									<tree editable="top">
-										<field name="patient_id" invisible="True"/>
-										<field name="diente_perma_id"/>
-										<field name="diagnostico_diente"/>
-									</tree>
-								</field>
-							</page>
-
-							<page string="Antecedentes Odontograma Temporales">
-								<field name="antecedentes_dientes_temporales_ids" nolabel="1">
-									<tree editable="top">
-										<field name="patient_id" invisible="True"/>
-										<field name="diente_temp_id"/>
-										<field name="diagnostico_diente"/>
-									</tree>
-								</field>
-							</page>
-
-						</notebook>
-
 							<notebook>
 								<page string="Odontograma Permanentes" context="{'patient_id' : patient_id}">
 									<field name="dientes_permanentes_ids" nolabel="1">
