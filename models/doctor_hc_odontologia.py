@@ -67,7 +67,7 @@ class doctor_hc_odontologia(osv.osv):
 			res['age_attention'] = self.calcular_edad(fecha_nacimiento)
 			res['age_unit'] = self.calcular_age_unit(fecha_nacimiento)
 			res['ref'] = ref
-			res['tdoc'] = self.pool.ge('doctor.doctor').tipo_documento(tdoc)
+			res['tdoc'] = self.pool.get('doctor.doctor').tipo_documento(tdoc)
 
 		return res
 
