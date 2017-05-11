@@ -39,12 +39,9 @@ class doctor_hc_odontologia(osv.osv):
 			vals['number'] = self.pool.get('ir.sequence').get(cr, uid, 'attention.sequence')
 		return super(doctor_hc_odontologia, self).create(cr, uid, vals, context=context)
 
-
-
 	def tipo_documento(self, tipo):
 
 		nombre_tipo = None
-
 		if tipo == '13':
 			nombre_tipo = 'CC'
 		elif tipo == '11':
@@ -61,10 +58,7 @@ class doctor_hc_odontologia(osv.osv):
 			nombre_tipo = 'AS'
 		elif tipo == 'MS':
 			nombre_tipo = 'MS'
-
 		return nombre_tipo
-
-
 
 	def obtener_paciente(self, context):
 
