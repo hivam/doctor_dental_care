@@ -41,6 +41,29 @@ class doctor_hc_odontologia(osv.osv):
 
 
 
+	def tipo_documento(self, tipo):
+
+		nombre_tipo = None
+
+		if tipo == '13':
+			nombre_tipo = 'CC'
+		elif tipo == '11':
+			nombre_tipo = 'RC'
+		elif tipo == '12':
+			nombre_tipo = 'TI'
+		elif tipo == '21':
+			nombre_tipo = 'CE'
+		elif tipo == '41':
+			nombre_tipo = 'Pasaporte'
+		elif tipo == 'NU':
+			nombre_tipo = 'NU'
+		elif tipo == 'AS':
+			nombre_tipo = 'AS'
+		elif tipo == 'MS':
+			nombre_tipo = 'MS'
+
+		return nombre_tipo
+
 
 
 	def obtener_paciente(self, context):
@@ -67,7 +90,7 @@ class doctor_hc_odontologia(osv.osv):
 			res['age_attention'] = self.calcular_edad(fecha_nacimiento)
 			res['age_unit'] = self.calcular_age_unit(fecha_nacimiento)
 			res['ref'] = ref
-			res['tdoc'] = self.pool.get('doctor.doctor').tipo_documento(tdoc)
+			res['tdoc'] = self.tipo_documento(tdoc)
 
 		return res
 
