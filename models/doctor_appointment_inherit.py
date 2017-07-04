@@ -58,6 +58,15 @@ class doctor_appointment(osv.osv):
 
 	def generate_attentiont(self, cr, uid, ids, context={}):
 		doctor_appointment = self.browse(cr, uid, ids, context=context)[0]
+
+		tipo_historia = doctor_appointment.type_id.modulos_id.name
+
+		modelo = self.pool.get('doctor.doctor').tipo_historia(tipo_historia)
+
+		self.pool.get('doctor.doctor').obtener_ultimas_atenciones_paciente(cr, uid, modelo, 2, doctor_appointment.patient_id.id, doctor_appointment.create_date, context=context)
+
+
+
 		#attentiont_id = self.create_attentiont(cr, uid, doctor_appointment, context=context)
 		# Update appointment state
 		appointment_state = doctor_appointment.state
