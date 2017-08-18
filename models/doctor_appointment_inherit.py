@@ -29,7 +29,11 @@ class doctor_appointment(osv.osv):
 	_name = "doctor.appointment"
 	_inherit = "doctor.appointment"
 
-	_columns = {}
+	_columns = {
+
+		'attentiont_odontologia_id': fields.many2one('doctor.hc.odontologia', 'Attentiont', ondelete='restrict', readonly=True),
+
+	}
 
 
 	def create_attentiont_dental_care(self, cr, uid, doctor_appointment, modelo_crear,  context={}):
@@ -49,7 +53,7 @@ class doctor_appointment(osv.osv):
 		attentiont_id = attentiont_obj.create(cr, uid, attentiont, context=context)
 		# Create number attentiont record
 		attentiont_number = {
-			'attentiont_id': attentiont_id,
+			'attentiont_odontologia_id': attentiont_id,
 		}
 
 		self.pool.get('doctor.appointment').write(cr, uid, [doctor_appointment.id], attentiont_number, context=context)
