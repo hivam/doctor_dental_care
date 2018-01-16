@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report auto="False" id="doctor_attention_odontologia_id" model="doctor.hc.odontologia" name="doctor_hc_odontologia"
+                rml="doctor_dental_care/report/doctor_attention_odontologia.rml" string="HC-Atención-Odontologia"
+                usage="default"/>
+
+
+
+
+    </data>
+</openerp>
+
+
