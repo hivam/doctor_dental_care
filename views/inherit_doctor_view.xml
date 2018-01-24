@@ -23,6 +23,11 @@
 				<header>
                     <button string="Finalizar Atención" name="finalizar_atencion" states="abierta" type="object" class="oe_highlight" groups="doctor.group_doctor_odontologo"/>
                     <field name="state" widget="statusbar" statusbar_visible="abierta,cerrada"/>
+
+                    <button string="Ver HC" name="button_imprimir_informes" type="object" class="oe_highlight" context="{'patient_id' : patient_id}" />
+
+           			<button string="Última Atención" name="button_imprimir_ultimas_hc" type="object" class="oe_highlight" context="{'patient_id' : patient_id}" />
+
                 </header>
 				<group colspan='4' col='4'>
 					<group colspan='4' col='2'>

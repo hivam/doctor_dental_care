@@ -2,12 +2,21 @@
 <openerp>
     <data>
 
-        <report auto="False" id="doctor_attention_odontologia_id" model="doctor.hc.odontologia" name="doctor_hc_odontologia"
-                rml="doctor_dental_care/report/doctor_attention_odontologia.rml" string="HC-Atención-Odontologia"
+        <report auto="False" 
+        		id="doctor_attention_odontologia_id" 
+        		model="doctor.hc.odontologia" 
+        		name="doctor_hc_odontologia"
+                rml="doctor_dental_care/report/doctor_attention_odontologia.rml" 
+                string="HC-Atención-Odontologia"
                 usage="default"/>
 
-
-
+        <report auto="False" 
+        		id="doctor_attention_odontologia_report_id" 
+        		model="doctor.list_report_print" 
+        		name="doctor_hc_odontologia_report"
+                rml="doctor_dental_care/report/doctor_attention_odontologia_report.rml" 
+                string="Últimas HC Odontología"
+                usage="default"/>
 
     </data>
 </openerp>

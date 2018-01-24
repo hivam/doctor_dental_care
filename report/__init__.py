@@ -1,1 +1,2 @@
 import doctor_attention_odontologia
+import doctor_attention_odontologia_report

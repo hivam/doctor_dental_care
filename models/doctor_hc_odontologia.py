@@ -304,6 +304,7 @@ class doctor_hc_odontologia(osv.osv):
 
 		'antecedentes_procedimientos_ids': fields.function(_get_procedimientos, relation="doctor.hc.odontologia.odontograma", type="one2many", store=False,
 										  readonly=True, method=True, string="Antecedente Procedimientos"),
+		'list_report_print_odontologia_id': fields.many2one('doctor.list_report', 'List Report'),
 
 
 	}
@@ -331,6 +332,68 @@ class doctor_hc_odontologia(osv.osv):
 
 		# your treatment
 		return True
+
+	def button_imprimir_informes(self, cr, uid, ids, context=None):
+		data_obj = self.pool.get('ir.model.data')
+		result = data_obj._get_id(cr, uid, 'l10n_co_doctor', 'view_doctor_list_report_form')
+		view_id = data_obj.browse(cr, uid, result).res_id
+
+		profesional=''
+		patient=''
+		for x in self.browse(cr,uid,ids):
+			patient= x.patient_id.id
+			profesional= x.professional_id.id
+
+		context['default_patient_id']= patient
+		context['default_professional_id']= profesional
+		context['default_ultimas_citas'] = False
+
+		return {
+			'type': 'ir.actions.act_window',
+			'name': 'Ver Historia Clínica Completa',
+			'view_type': 'form',
+			'view_mode': 'form',
+			'res_id': False,
+			'res_model': 'doctor.list_report',
+			'context': context or None,
+			'view_id': [view_id] or False,
+			'nodestroy': False,
+			'target': 'new'
+		}
+
+
+
+	def button_imprimir_ultimas_hc(self, cr, uid, ids, context=None):
+
+
+		data_obj = self.pool.get('ir.model.data')
+		result = data_obj._get_id(cr, uid, 'l10n_co_doctor', 'view_doctor_list_report_form')
+		view_id = data_obj.browse(cr, uid, result).res_id
+
+
+		profesional=''
+		patient=''
+		for x in self.browse(cr,uid,ids):
+			patient= x.patient_id.id
+			profesional= x.professional_id.id
+
+		context['default_patient_id']= patient
+		context['default_professional_id']= profesional
+		context['default_ultimas_citas'] = True
+
+		return {
+			'type': 'ir.actions.act_window',
+			'name': 'Ver Historia Clínica Completa',
+			'view_type': 'form',
+			'view_mode': 'form',
+			'res_id': False,
+			'res_model': 'doctor.list_report',
+			'context': context or None,
+			'view_id': [view_id] or False,
+			'nodestroy': False,
+			'target': 'new'
+		}
+
 
 doctor_hc_odontologia()
 

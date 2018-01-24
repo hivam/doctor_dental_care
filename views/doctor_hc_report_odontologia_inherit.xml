@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+	<!--doctor list report inherit-->
+	<record id="doctor_patient_odontologia_inherit_form" model="ir.ui.view">
+	  <field name="name">Historia Clinica Completa</field>
+	  <field name="model">doctor.list_report</field>
+	  <field name="inherit_id" ref="l10n_co_doctor.view_doctor_list_report_form"/>
+	  <field name="arch" type="xml">
+
+			<xpath expr="//form[@string='Historia Clinica Completa']//fieldset[2]" position="after">
+			   <fieldset class="fieldset_margen" attrs="{'invisible':[ ('ultimas_citas','=',True)]}">
+					<legend class="texto_legend">Lista de Atenciones Odontologia</legend>
+					<group col='4'>
+						<field name="attentions_odontology_ids" nolabel="1" default_order="sequence,date_attention asc"/>
+					</group>	
+				</fieldset>
+			</xpath>
+	  </field>
+	</record>
+
+
+  </data>
+</openerp>
