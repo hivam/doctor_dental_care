@@ -30,7 +30,7 @@ class doctor_hc_report_odontologia_inherit(osv.osv):
 	_inherit = "doctor.list_report"
 
 	_columns = {
-		'attentions_odontology_ids': fields.one2many('doctor.hc.odontologia', 'list_report_print_odontologia_id', 'Attentions'),
+		#'attentions_odontology_ids': fields.one2many('doctor.hc.odontologia', 'list_report_print_odontologia_id', 'Attentions'),
 	}
 
 
