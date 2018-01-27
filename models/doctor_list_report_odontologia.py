@@ -135,6 +135,7 @@ class doctor_list_report_odontologia(osv.osv):
 		return False
 
 
+
 	#Funcion que permite cargar las ultimas tres atenciones que tenga el paciente en el momento.
 	def button_cargar_ultimas_atenciones(self, cr, uid, ids, context=None):
 
