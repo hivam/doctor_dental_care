@@ -5,3 +5,4 @@ import doctor_hc_inherit_medicamentos
 import doctor_patient_inherit
 import doctor_hc_odontologia_diente_tempo
 import doctor_hc_report_odontologia_inherit
+import doctor_list_report_odontologia

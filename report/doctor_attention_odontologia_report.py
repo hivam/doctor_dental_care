@@ -83,6 +83,6 @@ class doctor_attention_odontologia_report(report_sxw.rml_parse):
 		return ""
 
 
-report_sxw.report_sxw('report.doctor_hc_odontologia_report', 'doctor.list_report',
+report_sxw.report_sxw('report.doctor_attention_odontologia_report', 'doctor.list_report_odontologia',
 					  'addons/doctor_dental_care/report/doctor_attention_odontologia_report.rml',
 					  parser=doctor_attention_odontologia_report)

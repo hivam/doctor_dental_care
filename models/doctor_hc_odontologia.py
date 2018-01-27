@@ -305,6 +305,7 @@ class doctor_hc_odontologia(osv.osv):
 		'antecedentes_procedimientos_ids': fields.function(_get_procedimientos, relation="doctor.hc.odontologia.odontograma", type="one2many", store=False,
 										  readonly=True, method=True, string="Antecedente Procedimientos"),
 		'list_report_print_odontologia_id': fields.many2one('doctor.list_report', 'List Report'),
+		'list_report_odontologia_id': fields.many2one('doctor.list_report_odontologia', 'List Report'),
 
 
 	}
@@ -338,6 +339,7 @@ class doctor_hc_odontologia(osv.osv):
 		result = data_obj._get_id(cr, uid, 'l10n_co_doctor', 'view_doctor_list_report_form')
 		view_id = data_obj.browse(cr, uid, result).res_id
 
+		_logger.info('entrando ando')
 		profesional=''
 		patient=''
 		for x in self.browse(cr,uid,ids):
@@ -354,9 +356,9 @@ class doctor_hc_odontologia(osv.osv):
 			'view_type': 'form',
 			'view_mode': 'form',
 			'res_id': False,
-			'res_model': 'doctor.list_report',
+			'res_model': 'doctor.list_report_odontologia',
 			'context': context or None,
-			'view_id': [view_id] or False,
+			'view_id':  False,
 			'nodestroy': False,
 			'target': 'new'
 		}
@@ -387,9 +389,9 @@ class doctor_hc_odontologia(osv.osv):
 			'view_type': 'form',
 			'view_mode': 'form',
 			'res_id': False,
-			'res_model': 'doctor.list_report',
+			'res_model': 'doctor.list_report_odontologia',
 			'context': context or None,
-			'view_id': [view_id] or False,
+			'view_id': False,
 			'nodestroy': False,
 			'target': 'new'
 		}

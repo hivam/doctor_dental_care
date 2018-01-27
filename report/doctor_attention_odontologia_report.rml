@@ -131,7 +131,7 @@
           <para style="P11"></para>
         </td>
         <td>
-          <para style="P11">Atención N°: [[ (code.origin) ]]</para>
+          <para style="P11">Atención N°: [[ (code.number) ]]</para>
         </td>
      </tr>
     </blockTable>

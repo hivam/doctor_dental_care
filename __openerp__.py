@@ -42,6 +42,7 @@ Historia Clinica Para Odontologia.
         'views/doctor_hc_odontologia_diente_tempo_view.xml',
         'views/doctor_report_odontologia.xml',
         'views/doctor_hc_report_odontologia_inherit.xml',
+        #'views/doctor_list_report.xml',
         'data/doctor_hc_odontologia_diente_data.xml',
         'data/doctor_hc_odontologia_diente_temp_data.xml',
         'data/tipocita_odontologica.sql',
