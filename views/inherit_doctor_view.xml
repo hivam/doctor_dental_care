@@ -204,6 +204,24 @@
 									</field>
 								</page>
 
+								<page string="Odontograma Procedimientos" context="{'patient_id' : patient_id}">
+									<legend class="texto_legend">Dientes Permanentes</legend>
+									<field name="dientes_permanentes_procedimiento_ids" domain="[('diagnostico_diente', '!=', 'Sano')]" nolabel="1">
+										<tree editable="top">
+											<field name="diente_perma_id"/>
+											<field name="diagnostico_diente"/>
+										</tree>
+									</field>
+
+									<legend class="texto_legend">Dientes Temporales</legend>
+									<field name="dientes_temporales_procedimiento_ids" domain="[('diagnostico_diente', '!=', 'Sano')]" nolabel="1">
+										<tree editable="top">
+											<field name="diente_temp_id"/>
+											<field name="diagnostico_diente"/>
+										</tree>
+									</field>
+								</page>
+								
 							</notebook>
 					</page>
 

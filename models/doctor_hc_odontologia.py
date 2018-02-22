@@ -306,6 +306,8 @@ class doctor_hc_odontologia(osv.osv):
 										  readonly=True, method=True, string="Antecedente Procedimientos"),
 		'list_report_print_odontologia_id': fields.many2one('doctor.list_report', 'List Report'),
 		'list_report_odontologia_id': fields.many2one('doctor.list_report_odontologia', 'List Report'),
+		'dientes_permanentes_procedimiento_ids': fields.one2many('doctor.hc.odontologia_odonto_per', 'hc_odontologia_id','Dientes Permanentes', domain=[('diagnostico_diente', '!=', 'Sano')], states={'cerrada': [('readonly', True)]} ),
+		'dientes_temporales_procedimiento_ids': fields.one2many('doctor.hc.odontologia_odonto_temp', 'hc_odontologia_id','Dientes Temporales', domain=[('diagnostico_diente', '!=', 'Sano')], states={'cerrada': [('readonly', True)]} ),
 
 
 	}
@@ -460,6 +462,7 @@ class Odontograma_dientes_temp(osv.osv):
 
 
 Odontograma_dientes_temp()
+
 
 
 class doctor_hc_odontologia_estomatologico(osv.osv):

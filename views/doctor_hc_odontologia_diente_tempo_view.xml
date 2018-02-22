@@ -2,7 +2,7 @@
 <openerp>
 	<data>
 	<record model="ir.ui.view" id="doctor_hc_diente_tempo_form">
-      <field name="name">doctor.hc.odontologia.diente.tempo.form</field>
+      <field name="name">doctor.hc.odontologia.diente_procedimiento.form</field>
       <field name="model">doctor.hc.odontologia.diente_tempo</field>
       <field name="arch" type="xml">
         <form string="Diente Temporal" version="7.0">
@@ -17,17 +17,6 @@
             </fieldset>
           </sheet> 
         </form>
-      </field>
-    </record>
-
-    <!-- Tree View -->
-    <record model="ir.ui.view" id="doctor_hc_diente_tempo_tree">
-      <field name="name">doctor.hc.odontologia.diente.tempo.tree</field>
-      <field name="model">doctor.hc.odontologia.diente_tempo</field>
-      <field name="arch" type="xml">
-        <tree string="Diente Temporal">
-          <field name="name"/>
-        </tree>
       </field>
     </record>
 

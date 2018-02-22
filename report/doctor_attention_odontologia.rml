@@ -244,7 +244,7 @@
     </section>
 
     <section>
-      [[o.dientes_permanentes_ids or removeParentNode('section') ]]
+      [[o.dientes_permanentes_procedimiento_ids or removeParentNode('section') ]]
       <blockTable colWidths="534.0" style="Table6">
         <tr>
           <td>
@@ -264,7 +264,7 @@
       </blockTable>
       <blockTable colWidths="267.0, 267.0" style="Table6">
           <tr>
-            <para style="P4">[[ repeatIn(o.dientes_permanentes_ids, 'line') ]]</para>
+            <para style="P4">[[ repeatIn(o.dientes_permanentes_procedimiento_ids, 'line') ]]</para>
             <td>
               <para style="letra_centrada">[[line.diente_perma_id.name]]</para>
             </td>
@@ -274,6 +274,23 @@
           </tr>
         </blockTable>
     </section>
+
+
+    <section>
+      [[o.dientes_temporales_procedimiento_ids or removeParentNode('section') ]]
+      <blockTable colWidths="267.0, 267.0" style="Table6">
+          <tr>
+            <para style="P4">[[ repeatIn(o.dientes_temporales_procedimiento_ids, 'line') ]]</para>
+            <td>
+              <para style="letra_centrada">[[line.diente_temp_id.name]]</para>
+            </td>
+            <td>
+              <para style="letra_centrada">[[ line.diagnostico_diente ]] </para>
+            </td>
+          </tr>
+        </blockTable>
+    </section>
+
 
 
 
