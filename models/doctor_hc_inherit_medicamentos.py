@@ -40,7 +40,7 @@ class doctor_prescription_co(osv.osv):
 																					('inject', 'Inyectar'),
 																					('apply', 'Aplicar'),
 																					('inhale', 'Inhalar'),
-																			], 'Acción'),
+																			], u'Acción'),
 
 				'frequency': fields.integer('Frecuencia (cada)'),
 				'frequency_unit_n': fields.selection([
@@ -59,7 +59,7 @@ class doctor_prescription_co(osv.osv):
 																									('months', 'Meses'),
 																									('indefinite', 'Indefinido'),
 																							], 'Periodo',),
-				'administration_route_id': fields.many2one('doctor.administration.route', 'Ruta Administración',
+				'administration_route_id': fields.many2one('doctor.administration.route', u'Ruta Administración',
 																									 ondelete='restrict'),
 				'indications': fields.text('Indicaciones'),
 				'plantilla_id': fields.many2one('doctor.attentions.recomendaciones', 'Plantillas'),

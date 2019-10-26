@@ -67,7 +67,7 @@ class doctor_attention_odontologia_report(report_sxw.rml_parse):
 	#funcion para cambiar las palabras de ingles a español
 	def select_diseases(self, status):
 		if status== 'presumptive':
-			return "Impresión Diagnóstica"
+			return u'Impresión Diagnóstica'
 		if status== 'confirm':
 			return "Confirmado"
 		if status== 'recurrent':

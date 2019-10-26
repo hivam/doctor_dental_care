@@ -281,7 +281,7 @@ class doctor_hc_odontologia(osv.osv):
 		'ref': fields.char('Identificacion', readonly=True),
 		'tdoc': fields.char('tdoc', readonly=True),
 		'peso': fields.float('Peso (kg)', states={'cerrada': [('readonly', True)]}),
-		'professional_id': fields.many2one('doctor.professional', 'Médico', required=False, readonly=True),
+		'professional_id': fields.many2one('doctor.professional', u'Médico', required=False, readonly=True),
 		'speciality': fields.related('professional_id', 'speciality_id', type="many2one", relation="doctor.speciality", readonly=True,
 									 string='Especialidad', required=False, store=True),
 		'professional_photo': fields.related('professional_id', 'photo', type="binary", relation="doctor.professional",
@@ -354,7 +354,7 @@ class doctor_hc_odontologia(osv.osv):
 
 		return {
 			'type': 'ir.actions.act_window',
-			'name': 'Ver Historia Clínica Completa',
+			'name': u'Ver Historia Clínica Completa',
 			'view_type': 'form',
 			'view_mode': 'form',
 			'res_id': False,

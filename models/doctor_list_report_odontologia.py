@@ -39,8 +39,8 @@ class doctor_list_report_odontologia(osv.osv):
 		'professional_id': fields.many2one('doctor.professional', 'Doctor'),
 		'attentions_odontology_ids': fields.one2many('doctor.hc.odontologia', 'list_report_odontologia_id', 'Attentions'),
 		'patient_id': fields.many2one('doctor.patient', 'Paciente', required=True),
-		'fecha_inicio':fields.datetime('Inicio Atención'),
-		'fecha_fin':fields.datetime('Fin Atención'),
+		'fecha_inicio':fields.datetime(u'Inicio Atención'),
+		'fecha_fin':fields.datetime(u'Fin Atención'),
 		'especialidad_id':fields.many2one('doctor.speciality', 'Especialidad'),
 		'ultimas_citas' :fields.boolean('Ultima Cita'),
 	}
